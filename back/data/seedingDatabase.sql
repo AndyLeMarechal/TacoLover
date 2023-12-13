@@ -49,7 +49,7 @@ INSERT INTO "user"
   ("id", "username", "email", "password", "firstname", "lastname", "adress", "role")
 VALUES
   (1, 'MiguelTL', 'Miguel@tacolover.io', '123456', 'Miguel', 'Tacolover', '.', 'Admin'),
-  (2, 'ViolaTL', 'Viola@tacolover.io', '54321', 'Viola', 'Tacolover', '.', 'editor'),
+  (2, 'ViolaTL', 'Viola@tacolover.io', '54321', 'Viola', 'Tacolover', '.', 'Editor'),
   (3, 'JeanDuPuis', 'JeanDuPuis@gmail.com', '56789', 'Jean', 'Du Puis', '25 rue de la base de loisir, 92456 Clachy', 'Signed')
 ;
 
