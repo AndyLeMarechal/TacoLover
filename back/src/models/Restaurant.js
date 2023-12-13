@@ -8,7 +8,7 @@ Restaurant.init({
         type: DataTypes.TEXT,
         allowNull: false
     },
-    adress: {
+    address: {
         type: DataTypes.TEXT,
         allowNull: false
     },

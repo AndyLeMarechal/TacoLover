@@ -46,7 +46,7 @@ VALUES
 ;
 
 INSERT INTO "user"
-  ("id", "username", "email", "password", "firstname", "lastname", "adress", "role")
+  ("id", "username", "email", "password", "firstname", "lastname", "address", "role")
 VALUES
   (1, 'MiguelTL', 'Miguel@tacolover.io', '123456', 'Miguel', 'Tacolover', '.', 'Admin'),
   (2, 'ViolaTL', 'Viola@tacolover.io', '54321', 'Viola', 'Tacolover', '.', 'Editor'),
@@ -54,7 +54,7 @@ VALUES
 ;
 
 INSERT INTO "restaurant"
-  ("id", "name", "adress")
+  ("id", "name", "address")
 VALUES
   (1, 'Taco Lover { La ville du bois }', '35 rue de la Croix Saint-Jacques 91620 La Ville du Bois'),
   (2, 'Taco Lover { Paris }', '6 Bd Poissonnière, 75009 Paris'),

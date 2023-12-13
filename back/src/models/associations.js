@@ -7,6 +7,7 @@ import { Restaurant } from "./Restaurant.js";
 import { Tag } from "./Tag.js";
 import { User } from "./User.js";
 
+export const MenuHasPlat = sequelize.define("menu_has_plat", {}, { tableName: "menu_has_plat" });
 
 //Un Menu posséde plusieurs Plat
 Menu.belongsToMany(Plat, {
@@ -24,6 +25,7 @@ Plat.belongsToMany(Menu, {
     foreignKey: "plat_id",
 })
 
+export const MenuHasBoisson = sequelize.define("menu_has_boisson", {}, { tableName: "menu_has_boisson" });
 
 //Un Menu posséde plusieurs Boisson
 Menu.belongsToMany(Boisson, {
@@ -41,6 +43,7 @@ Boisson.belongsToMany(Menu, {
     foreignKey: "boisson_id",
 })
 
+export const MenuHasDessert = sequelize.define("menu_has_dessert", {}, { tableName: "menu_has_dessert" });
 
 //Un Menu posséde plusieurs Dessert
 Menu.belongsToMany(Dessert, {
@@ -58,6 +61,7 @@ Dessert.belongsToMany(Menu, {
     foreignKey: "dessert_id",
 })
 
+export const PlatHasTag = sequelize.define("plat_has_tag", {}, { tableName: "plat_has_tag" });
 
 //Un Plat posséde plusieur Tag
 Plat.belongsToMany(Tag, {

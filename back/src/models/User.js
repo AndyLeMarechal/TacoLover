@@ -19,7 +19,7 @@ User.init({
         allowNull: false,
         unique: true
     },
-    frstname: {
+    firstname: {
         type: DataTypes.TEXT,
         allowNull: false,
     },
@@ -27,7 +27,7 @@ User.init({
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    adress: {
+    address: {
         type: DataTypes.TEXT,
         allowNull: false,
     },
