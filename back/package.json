@@ -5,7 +5,8 @@
   "scripts": {
     "db:create": "psql -U tacolover -d tacolover -f ./data/createDatabase.sql",
     "db:seeding": "psql -U tacolover -d tacolover -f ./data/seedingDatabase.sql",
-    "db:reset": "npm run db:create && npm run db:seeding"
+    "db:reset": "npm run db:create && npm run db:seeding",
+    "dev": "npx nodemon /var/www/html/Projet-Titre-Pro/back/index.js"
   },
   "type": "module",
   "keywords": [],

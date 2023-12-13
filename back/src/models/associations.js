@@ -1,6 +1,7 @@
+import { sequelize } from "./sequelize-client.js";
+
 import { Boisson } from "./Boisson.js";
 import { Dessert } from "./Dessert.js";
-import { Ingredient } from "./Ingredient.js";
 import { Menu } from "./Menu.js";
 import { Plat } from "./Plat.js";
 import { Restaurant } from "./Restaurant.js";
