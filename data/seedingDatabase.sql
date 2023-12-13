@@ -40,7 +40,9 @@ INSERT INTO "dessert"
 VALUES
   (1, 'Tiramisu'),
   (2, 'Fruit de saison'),
-  (3, 'Cookie double chocolat')
+  (3, 'Cookie double chocolat'),
+  (4, 'Compote de pomme'),
+  (5, 'Compote de poire')
 ;
 
 INSERT INTO "user"
@@ -68,19 +70,77 @@ VALUES
   (3, 'SPICY', '#00FF00')
 ;
 
--- INSERT INTO 'card_has_tag' 
---   (card_id, tag_id) 
--- VALUES 
---   (1, 3), -- Savon eco-friendly
---   (1, 1), -- Savon urgent
---   (5, 1), -- Nourrir le chat : urgent
---   (4, 2)
--- ;
+INSERT INTO "menu_has_plat" 
+  (menu_id, plat_id) 
+VALUES 
+  (1, 1), -- Menu complet 
+  (1, 2), -- Menu complet 
+  (1, 3), -- Menu complet 
+  (1, 4), -- Menu complet 
+  (1, 5), -- Menu complet 
+  (2, 1), -- Menu a choix
+  (2, 2), -- Menu a choix
+  (2, 3), -- Menu a choix
+  (2, 4), -- Menu a choix
+  (2, 5), -- Menu a choix
+  (3, 4) -- Menu enfant
+;
 
+INSERT INTO "menu_has_boisson" 
+  (menu_id, boisson_id) 
+VALUES 
+  (1, 1), -- Menu complet 
+  (1, 2), -- Menu complet 
+  (1, 3), -- Menu complet 
+  (1, 4), -- Menu complet 
+  (1, 5), -- Menu complet 
+  (1, 6), -- Menu complet 
+  (1, 7), -- Menu complet 
+  (1, 8), -- Menu complet 
+  (1, 9), -- Menu complet 
+  (2, 1), -- Menu a choix
+  (2, 2), -- Menu a choix
+  (2, 3), -- Menu a choix
+  (2, 4), -- Menu a choix
+  (2, 5), -- Menu a choix
+  (2, 6), -- Menu a choix
+  (2, 7), -- Menu a choix
+  (2, 8), -- Menu a choix
+  (2, 9), -- Menu a choix
+  (3, 1), -- Menu enfant
+  (3, 2), -- Menu enfant
+  (3, 3), -- Menu enfant
+  (3, 4), -- Menu enfant
+  (3, 5), -- Menu enfant
+  (3, 6) -- Menu enfant
+;
 
--- SELECT setval('list_id_seq', (SELECT MAX(id) from 'list'));
--- SELECT setval('card_id_seq', (SELECT MAX(id) from 'card'));
--- SELECT setval('tag_id_seq', (SELECT MAX(id) from 'tag'));
+INSERT INTO "menu_has_dessert" 
+  (menu_id, dessert_id) 
+VALUES 
+  (1, 1), -- Menu complet 
+  (1, 2), -- Menu complet 
+  (1, 3), -- Menu complet 
+  (1, 4), -- Menu complet 
+  (1, 5), -- Menu complet 
+  (2, 1), -- Menu a choix
+  (2, 2), -- Menu a choix
+  (2, 3), -- Menu a choix
+  (2, 4), -- Menu a choix
+  (2, 5), -- Menu a choix
+  (3, 4), -- Menu enfant
+  (3, 5) -- Menu enfant
+;
+
+INSERT INTO "plat_has_tag" 
+  (plat_id, tag_id) 
+VALUES 
+  (2, 2), --
+  (3, 3), --
+  (4, 1), --
+  (5, 3) --
+;
+
 
 
 COMMIT;
