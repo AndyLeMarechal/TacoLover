@@ -14,7 +14,9 @@ export async function getOneDessert(req, res) {
 export async function createdDessert(req, res) {
     const body = req.body;
     const createdDessert = await Dessert.create({
-        title: body.title
+        title: body.title,
+        price: body.price ||"€" ,
+        img: body.img || "."
     })
     res.json(createdDessert);
 };

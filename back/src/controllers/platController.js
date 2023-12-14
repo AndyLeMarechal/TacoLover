@@ -17,7 +17,9 @@ export async function createdPlat(req, res) {
     const body = req.body;
     const createdPlat = await Plat.create({
         title: body.title,
-        description: body.description
+        description: body.description,
+        price: body.price ||"€" ,
+        img: body.img || "." 
     });
     res.json(createdPlat)
 };

@@ -15,7 +15,9 @@ export async function createdDrink(req, res) {
     const body = req.body;
     const createdDrink = await Drink.create({
         title: body.title,
-        soft: body.soft
+        soft: body.soft,
+        price: body.price ||"€" ,
+        img: body.img || "."
     });
     res.json(createdDrink);
 };

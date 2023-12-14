@@ -20,7 +20,9 @@ export async function createdMenu(req, res) {
     const body = req.body;
     const menu = await Menu.create({
         title: body.title,
-        description: body.description
+        description: body.description,
+        price: body.price ||"€" ,
+        img: body.img || "."
     });
     res.json(menu)
 };
