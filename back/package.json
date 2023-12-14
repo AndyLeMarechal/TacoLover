@@ -6,6 +6,9 @@
     "db:create": "psql -U tacolover -d tacolover -f ./data/createDatabase.sql",
     "db:seeding": "psql -U tacolover -d tacolover -f ./data/seedingDatabase.sql",
     "db:reset": "npm run db:create && npm run db:seeding",
+    "db:create:sequelize": "node ./data/createDatabase.js",
+    "db:seed:sequelize": "node ./data/seedingDatabase.js",
+    "db:reset:sequelize": "npm run db:create:sequelize && npm run db:seed:sequelize",
     "dev": "npx nodemon /var/www/html/Projet-Titre-Pro/back/index.js"
   },
   "type": "module",

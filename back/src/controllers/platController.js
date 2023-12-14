@@ -1,7 +1,9 @@
 import { Plat } from "../models/index.js";
 
 export async function getAllPlats(req, res) {
-    const plats = await Plat.findAll()
+    const plats = await Plat.findAll({
+        include: 'tags'
+    })
     res.json(plats)
 };
 
@@ -36,5 +38,4 @@ export async function deletedPlat(req, res) {
     const plat = await Plat.findByPk(platId);
     const deletedPlat = await plat.destroy();
     res.json(deletedPlat);
-
 };

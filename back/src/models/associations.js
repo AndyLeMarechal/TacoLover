@@ -13,7 +13,7 @@ export const MenuHasPlat = sequelize.define("menu_has_plat", {}, { tableName: "m
 //Un Menu posséde plusieurs Plat
 Menu.belongsToMany(Plat, {
     as: "plats", 
-    through: "menu_has_plat", 
+    through: MenuHasPlat, 
     foreignKey: "menu_id", 
     otherKey: "plat_id",
 });
@@ -21,7 +21,7 @@ Menu.belongsToMany(Plat, {
 //Un Plat appartient a plusieurs Menu
 Plat.belongsToMany(Menu, {
     as: "menus",
-    through: "menu_has_plat",
+    through: MenuHasPlat,
     otherKey: "menu_id",
     foreignKey: "plat_id",
 })
@@ -31,17 +31,17 @@ export const MenuHasDrink = sequelize.define("menu_has_drink", {}, { tableName: 
 //Un Menu posséde plusieurs Boisson
 Menu.belongsToMany(Drink, {
     as: "drinks", 
-    through: "menu_has_boisson", 
+    through: MenuHasDrink, 
     foreignKey: "menu_id", 
-    otherKey: "boisson_id",
+    otherKey: "drink_id",
 })
 
 //Une Boisson appartient a plusieurs Menu
 Drink.belongsToMany(Menu, {
     as: "menus",
-    through: "menu_has_boisson",
+    through: MenuHasDrink,
     otherKey: "menu_id",
-    foreignKey: "boisson_id",
+    foreignKey: "drink_id",
 })
 
 export const MenuHasDessert = sequelize.define("menu_has_dessert", {}, { tableName: "menu_has_dessert" });
@@ -49,7 +49,7 @@ export const MenuHasDessert = sequelize.define("menu_has_dessert", {}, { tableNa
 //Un Menu posséde plusieurs Dessert
 Menu.belongsToMany(Dessert, {
     as: "desserts", 
-    through: "menu_has_dessert", 
+    through: MenuHasDessert, 
     foreignKey: "menu_id", 
     otherKey: "dessert_id",
 })
@@ -57,7 +57,7 @@ Menu.belongsToMany(Dessert, {
 //Un Dessert appartient a plusieurs Menu
 Dessert.belongsToMany(Menu, {
     as: "menus",
-    through: "menu_has_dessert",
+    through: MenuHasDessert,
     otherKey: "menu_id",
     foreignKey: "dessert_id",
 })
@@ -67,7 +67,7 @@ export const PlatHasTag = sequelize.define("plat_has_tag", {}, { tableName: "pla
 //Un Plat posséde plusieur Tag
 Plat.belongsToMany(Tag, {
     as: "tags", 
-    through: "plat_has_tag", 
+    through: PlatHasTag, 
     foreignKey: "plat_id", 
     otherKey: "tag_id",
 })
@@ -75,7 +75,7 @@ Plat.belongsToMany(Tag, {
 //Un Tag appartient a plusieurs Plat
 Tag.belongsToMany(Plat, {
     as: "plats",
-    through: "plat_has_tag",
+    through: PlatHasTag,
     otherKey: "plat_id",
     foreignKey: "tag_id",
 })
