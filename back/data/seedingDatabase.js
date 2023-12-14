@@ -11,76 +11,76 @@ async function seedDatabase() {
 
   // Create Menu
   const menu1 = await Menu.create(
-    { title: 'Menu { Plat / Boisson / Dessert }', description: 'Menu complet', });
+    { title: 'Menu { Plat / Boisson / Dessert }', description: 'Menu complet', price:'€', img: '.' });
 
   const menu2 = await Menu.create(
-    { title: 'Menu { Plat / Boisson ou Dessert }', description: 'Menu a choix', });
+    { title: 'Menu { Plat / Boisson ou Dessert }', description: 'Menu a choix', price:'€', img: '.' });
 
   const menu3 = await Menu.create(
-    { title: 'Menu { Enfant }', description:'Menu pour les petits' });
+    { title: 'Menu { Enfant }', description:'Menu pour les petits', price: '€', img: '.' });
 
 
   // Create Plat
   const plat1 = await Plat.create(
-    {title: 'Fajitas Boeuf', description: 'Rumsteak de bœuf, oignons et poivrons. Plat à confectionner soi-même, servi avec du fromage râpé, du guacamole et des tortillas.'});
+    {title: 'Fajitas Boeuf', description: 'Rumsteak de bœuf, oignons et poivrons. Plat à confectionner soi-même, servi avec du fromage râpé, du guacamole et des tortillas.', price:'€', img: '.'});
 
   const plat2 = await Plat.create(
-    {title: 'Fajitas Poulet', description: 'Escalope de poulet mariné aux épices mexicaines, oignons et poivrons. Plat à confectionner soi-même, servi avec du fromage râpé, du guacamole et des tortillas.'});
+    {title: 'Fajitas Poulet', description: 'Escalope de poulet mariné aux épices mexicaines, oignons et poivrons. Plat à confectionner soi-même, servi avec du fromage râpé, du guacamole et des tortillas.', price:'€', img: '.'});
 
   const plat3 = await Plat.create(    
-    {title: 'Burritos poulet', description: 'Suprême de poulet sauté aux deux poivrons, épices mexicaines, fromage le tout enroulé dans une tortilla.'});
+    {title: 'Burritos poulet', description: 'Suprême de poulet sauté aux deux poivrons, épices mexicaines, fromage le tout enroulé dans une tortilla.', price:'€', img: '.'});
 
   const plat4 = await Plat.create( 
-    {title: 'Quesadillas de boeuf', description: 'Tortilla garnie de viande de bœuf hachée, poivrons rouges et verts, oignons, fromage et épices.'});
+    {title: 'Quesadillas de boeuf', description: 'Tortilla garnie de viande de bœuf hachée, poivrons rouges et verts, oignons, fromage et épices.', price:'€', img: '.'});
 
   const plat5 = await Plat.create( 
-    {title: 'Chili cone carne', description: 'Viande de bœuf hachée, duo de poivrons, haricots rouges, le tout légèrement relevé par des épices mexicaines et servi avec une quenelle de crème fraiche.'});
+    {title: 'Chili cone carne', description: 'Viande de bœuf hachée, duo de poivrons, haricots rouges, le tout légèrement relevé par des épices mexicaines et servi avec une quenelle de crème fraiche.', price:'€', img: '.'});
 
 
   // Create Drink
   const drink1 = await Drink.create(
-    {title: 'Coca-cola', soft: '1'});
+    {title: 'Coca-cola', soft: '1', price:'€', img: '.'});
 
   const drink2 = await Drink.create(
-    {title: 'Coca-cola zéro', soft: '1'});
+    {title: 'Coca-cola zéro', soft: '1', price:'€', img: '.'});
 
   const drink3 = await Drink.create(
-    {title: 'Coca-cola cherry', soft: '1'});
+    {title: 'Coca-cola cherry', soft: '1', price:'€', img: '.'});
 
   const drink4 = await Drink.create(
-    {title: 'Ice tea', soft: '1'});
+    {title: 'Ice tea', soft: '1', price:'€', img: '.'});
 
   const drink5 = await Drink.create(
-    {title: 'Oasis tropical', soft: '1'});
+    {title: 'Oasis tropical', soft: '1', price:'€', img: '.'});
 
   const drink6 = await Drink.create(
-    {title: 'Oasis pomme cassis framboise', soft: '1'});
+    {title: 'Oasis pomme cassis framboise', soft: '1', price:'€', img: '.'});
 
   const drink7 = await Drink.create(
-    {title: 'Corona', soft: '0'});
+    {title: 'Corona', soft: '0', price:'€', img: '.'});
 
   const drink8 = await Drink.create(
-    {title: 'Desperados', soft: '0'});
+    {title: 'Desperados', soft: '0', price:'€', img: '.'});
 
   const drink9 = await Drink.create(
-    {title: 'Pinacolada', soft: '0'});
+    {title: 'Pinacolada', soft: '0', price:'€', img: '.'});
 
 
   // Create Dessert
   const dessert1 = await Dessert.create(
-    {title: 'Tiramisu'});
+    {title: 'Tiramisu', price:'€', img: '.'});
 
   const dessert2 = await Dessert.create(
-    {title: 'Fruit de saison'});
+    {title: 'Fruit de saison', price:'€', img: '.'});
 
   const dessert3 = await Dessert.create(
-    {title: 'Cookie double chocolat'});
+    {title: 'Cookie double chocolat', price:'€', img: '.'});
 
   const dessert4 = await Dessert.create(
-    {title: 'Compote de pomme'});
+    {title: 'Compote de pomme', price:'€', img: '.'});
 
   const dessert5 = await Dessert.create(
-    {title: 'Compote de poire'});
+    {title: 'Compote de poire', price:'€', img: '.'});
 
 
   // Create User
@@ -163,50 +163,50 @@ async function seedDatabase() {
 
 
   // Add Dessert to Menu
-  await MenuHasDessert(menu1.id, dessert1.id)
-  await MenuHasDessert(menu1.id, dessert2.id)
-  await MenuHasDessert(menu1.id, dessert3.id)
-  await MenuHasDessert(menu1.id, dessert4.id)
-  await MenuHasDessert(menu1.id, dessert5.id)
+  await MenuHasDessert(menu1.id, dessert1.id);
+  await MenuHasDessert(menu1.id, dessert2.id);
+  await MenuHasDessert(menu1.id, dessert3.id);
+  await MenuHasDessert(menu1.id, dessert4.id);
+  await MenuHasDessert(menu1.id, dessert5.id);
 
-  await MenuHasDessert(menu2.id, dessert1.id)
-  await MenuHasDessert(menu2.id, dessert2.id)
-  await MenuHasDessert(menu2.id, dessert3.id)
-  await MenuHasDessert(menu2.id, dessert4.id)
-  await MenuHasDessert(menu2.id, dessert5.id)
+  await MenuHasDessert(menu2.id, dessert1.id);
+  await MenuHasDessert(menu2.id, dessert2.id);
+  await MenuHasDessert(menu2.id, dessert3.id);
+  await MenuHasDessert(menu2.id, dessert4.id);
+  await MenuHasDessert(menu2.id, dessert5.id);
 
-  await MenuHasDessert(menu3.id, dessert4.id)
-  await MenuHasDessert(menu3.id, dessert5.id)
+  await MenuHasDessert(menu3.id, dessert4.id);
+  await MenuHasDessert(menu3.id, dessert5.id);
 
 
   // Add Tag to Plat
   await platHasTag(plat2.id, bestProductTag.id);
-  await platHasTag(plat3.id, spicyTag.id)
-  await platHasTag(plat4.id, promoTag.id)
-  await platHasTag(plat5.id, spicyTag.id)
+  await platHasTag(plat3.id, spicyTag.id);
+  await platHasTag(plat4.id, promoTag.id);
+  await platHasTag(plat5.id, spicyTag.id);
 
   console.log("✅ TacoLover seed done with success !");
   
   console.log("🧹 Clean up by closing database connexion");
   await sequelize.close();
-}
+};
 
 async function MenuHasPlat(menuId, platId) {
   const menu = await Menu.findOne({where: {id: menuId}});
   await menu.addPlat(platId);
-}
+};
 
 async function MenuHasDrink(menuId, drinkId) {
     const menu = await Menu.findOne({ where: { id: menuId }});
     await menu.addDrink(drinkId);
-  }
+  };
 
   async function MenuHasDessert(menuId, dessertId) {
     const menu = await Menu.findOne({ where: { id: menuId }});
     await menu.addDessert(dessertId);
-  }
+  };
 
   async function platHasTag(platId, TagId) {
     const plat = await Plat.findOne({ where: { id: platId }});
     await plat.addTag(TagId);
-  }
+  };

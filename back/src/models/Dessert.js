@@ -8,6 +8,14 @@ Dessert.init({
         type: DataTypes.TEXT,
         allowNull: false
     },
+    price: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    img: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    }
 },{
     sequelize,
   tableName: "dessert"

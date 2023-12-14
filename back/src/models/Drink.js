@@ -11,6 +11,14 @@ Drink.init({
     soft: {
         type: DataTypes.BOOLEAN,
         allowNull: false
+    },
+    price: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    img: {
+        type: DataTypes.TEXT,
+        allowNull: false
     }
 },{
     sequelize,
