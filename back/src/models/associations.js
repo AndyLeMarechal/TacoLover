@@ -1,6 +1,6 @@
 import { sequelize } from "./sequelize-client.js";
 
-import { Boisson } from "./Boisson.js";
+import { Drink } from "./Drink.js";
 import { Dessert } from "./Dessert.js";
 import { Menu } from "./Menu.js";
 import { Plat } from "./Plat.js";
@@ -26,18 +26,18 @@ Plat.belongsToMany(Menu, {
     foreignKey: "plat_id",
 })
 
-export const MenuHasBoisson = sequelize.define("menu_has_boisson", {}, { tableName: "menu_has_boisson" });
+export const MenuHasDrink = sequelize.define("menu_has_drink", {}, { tableName: "menu_has_drink" });
 
 //Un Menu posséde plusieurs Boisson
-Menu.belongsToMany(Boisson, {
-    as: "boissons", 
+Menu.belongsToMany(Drink, {
+    as: "drinks", 
     through: "menu_has_boisson", 
     foreignKey: "menu_id", 
     otherKey: "boisson_id",
 })
 
 //Une Boisson appartient a plusieurs Menu
-Boisson.belongsToMany(Menu, {
+Drink.belongsToMany(Menu, {
     as: "menus",
     through: "menu_has_boisson",
     otherKey: "menu_id",

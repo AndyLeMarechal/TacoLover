@@ -1,9 +1,9 @@
 import { sequelize } from "./sequelize-client.js";
 import { Model, DataTypes } from "sequelize";
 
-export class Boisson extends Model {}
+export class Drink extends Model {}
 
-Boisson.init({
+Drink.init({
     title: {
         type: DataTypes.TEXT,
         allowNull: false
@@ -14,5 +14,5 @@ Boisson.init({
     }
 },{
     sequelize,
-  tableName: "boisson"
+  tableName: "drink"
 })

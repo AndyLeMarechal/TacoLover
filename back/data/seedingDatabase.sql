@@ -21,7 +21,7 @@ VALUES
   (5, 'Chili cone carne', 'Viande de bœuf hachée, duo de poivrons, haricots rouges, le tout légèrement relevé par des épices mexicaines et servi avec une quenelle de crème fraiche.')
 ;
 
-INSERT INTO "boisson"
+INSERT INTO "drink"
   ("id", "title", "soft")
 VALUES
   (1, 'Coca-cola', '1'),
@@ -86,8 +86,8 @@ VALUES
   (3, 4) -- Menu enfant
 ;
 
-INSERT INTO "menu_has_boisson" 
-  (menu_id, boisson_id) 
+INSERT INTO "menu_has_drink" 
+  (menu_id, drink_id) 
 VALUES 
   (1, 1), -- Menu complet 
   (1, 2), -- Menu complet 
@@ -141,6 +141,12 @@ VALUES
   (5, 3) --
 ;
 
-
+SELECT setval('menu_id_seq', (SELECT MAX(id) from "menu")); 
+SELECT setval('drink_id_seq', (SELECT MAX(id) from "drink")); 
+SELECT setval('dessert_id_seq', (SELECT MAX(id) from "dessert")); 
+SELECT setval('plat_id_seq', (SELECT MAX(id) from "plat"));
+SELECT setval('restaurant_id_seq', (SELECT MAX(id) from "restaurant")); 
+SELECT setval('tag_id_seq', (SELECT MAX(id) from "tag")); 
+SELECT setval('user_id_seq', (SELECT MAX(id) from "user")); 
 
 COMMIT;

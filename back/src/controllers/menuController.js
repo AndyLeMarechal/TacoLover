@@ -1,4 +1,4 @@
-import { Menu, Plat, Boisson, Dessert } from "../models/index.js";
+import { Menu } from "../models/index.js";
 
 
 export async function getAllMenus(req, res) {
@@ -14,4 +14,34 @@ export async function getOneMenu(req, res) {
     });
     // console.log(menu)
     res.json(menu)
+};
+
+export async function createdMenu(req, res) {
+    const body = req.body;
+    const menu = await Menu.create({
+        title: body.title,
+        description: body.description
+    });
+    res.json(menu)
+};
+
+export async function updatedMenu(req, res) {
+    const menuId = req.params.id;
+    const body = req.body;
+    const menu = await Menu.findByPk(menuId);
+
+    const updatedMenu = await menu.update({
+        title: body.title,
+        description: body.description
+    });
+
+    res.json(updatedMenu);
+
+};
+
+export async function deletedMenu(req, res) {
+    const menuId = req.params.id;
+    const menu = await Menu.findByPk(menuId);
+    const deletedMenu = await menu.destroy();
+    res.json(deletedMenu)
 };

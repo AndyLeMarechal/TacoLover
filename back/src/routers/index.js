@@ -1,10 +1,10 @@
-import { readFile } from "node:fs/promises";
+
 import { Router } from "express";
 
 
 
-// import { router as boissonRouter } from "./boissonRouter.js";
-// import { router as dessertRouter } from "./dessertRouter.js";
+import { router as drinkRouter } from "./drinkRouter.js";
+import { router as dessertRouter } from "./dessertRouter.js";
 import { router as menuRouter } from "./menuRouter.js";
 // import { router as platRouter } from "./platRouter.js";
 // import { router as restaurantRouter } from "./restaurantRouter.js";
@@ -15,8 +15,8 @@ export const router = Router();
 
 
 // Main API routes
-// router.use(boissonRouter);
-// router.use(dessertRouter);
+router.use(drinkRouter);
+router.use(dessertRouter);
 router.use(menuRouter);
 // router.use(platRouter);
 // router.use(restaurantRouter);
