@@ -81,7 +81,7 @@ export async function createdUser(req, res) {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     address: req.body.address, 
-    role: req.body.role || "signed",
+    role: req.body.role || "registered",
   });
   res.status(201).json(createdUser);
 }

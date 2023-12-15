@@ -50,7 +50,7 @@ INSERT INTO "user"
 VALUES
   (1, 'MiguelTL', 'Miguel@tacolover.io', '123456', 'Miguel', 'Tacolover', '.', 'Admin'),
   (2, 'ViolettaTL', 'Violetta@tacolover.io', '54321', 'Violetta', 'Tacolover', '.', 'Editor'),
-  (3, 'JeanDuPuis', 'JeanDuPuis@gmail.com', '56789', 'Jean', 'Du Puis', '25 rue de la base de loisir, 92456 Clachy', 'Signed')
+  (3, 'JeanDuPuis', 'JeanDuPuis@gmail.com', '56789', 'Jean', 'Du Puis', '25 rue de la base de loisir, 92456 Clachy', 'registered')
 ;
 
 INSERT INTO "restaurant"

@@ -84,23 +84,24 @@ async function seedDatabase() {
 
 
   // Create User
-  await User.create(
+  await User.bulkCreate([
     {username: 'MiguelTL', email: 'Miguel@tacolover.io', password: '123456', firstname:'Miguel', lastname: 'Tacolover', address: '.', role: 'Admin'},
 
     {username: 'ViolettaTL', email: 'Violetta@tacolover.io', password: '54321', firstname:'Violetta', lastname: 'Tacolover', address: '.', role: 'Editor'},
 
-    {username: 'JeanDuPuis', email: 'JeanDuPuis@gmail.com', password: '56789', firstname:'Jean', lastname: 'Du Puis', address: '25 rue de la base de loisir, 92456 Clachy', role: 'Signed'});
+    {username: 'JeanDuPuis', email: 'JeanDuPuis@gmail.com', password: '56789', firstname:'Jean', lastname: 'Du Puis', address: '25 rue de la base de loisir, 92456 Clachy', role: 'registered'}]);
 
 
   // Create User
-  await Restaurant.create(
+  await Restaurant.bulkCreate([
+
     {name: 'Taco Lover { La ville du bois }', address: '35 rue de la Croix Saint-Jacques 91620 La Ville du Bois'},
 
 
     {name: 'Taco Lover { Paris }', address: '6 Bd Poissonnière, 75009 Paris'},
 
 
-    {name: 'Taco Lover { Nantes }', address: '13 Rue de Gorges, 44000 Nantes'});
+    {name: 'Taco Lover { Nantes }', address: '13 Rue de Gorges, 44000 Nantes'}]);
 
   // Create Tags
   const promoTag = await Tag.create({ name: 'PROMO',       color: '#FF00FF' });
