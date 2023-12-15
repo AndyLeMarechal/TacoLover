@@ -1,49 +1,179 @@
 import { User } from "../models/index.js";
+import Joi from 'joi';
+import bcrypt from "bcrypt";
 
 export async function getAllUsers(req, res) {
     const users = await User.findAll();
-    res.json(users);
+    if(!users){
+        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+    };
+    res.status(200).json(users);
 };
 
 export async function getOneUser(req, res) {
-    const userId = req.params.id;
+    const userId = Number.parseInt(req.params.id, 10);
+    if(isNaN(userId)){
+        return res.status(400).json({error: 'Menu ID should be a valid integer'})
+    };
     const user = await User.findByPk(userId);
-    res.json(user);
+    if(!user){
+        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+    };
+    res.status(200).json(user);
 };
 
 export async function createdUser(req, res) {
-    const body = req.body;
+    const createUserSchema = Joi.object({
+        username: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30)
+        .required(),
+
+        firstname: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30)
+        .required(),
+
+        lastname: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30)
+        .required(),
+
+        address: Joi.string()
+        .min(3)
+        .max(200)
+        .required(),
+
+        role: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30),
+
+        email: Joi.string()
+        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'fr'] } }) ,
+    })
+
+  const { error } = createUserSchema.validate(req.body);
+  if (error) { return res.status(400).json({ error: error.message }); }
+
+  if (req.body.password !== req.body.passwordConfirm) {
+    return res.status(400).json({error: 'Passwords do not match'})
+  };
+
+  const existingUser = await User.findOne({ where: { email } });
+  if (existingUser) {
+    return res.status(400).json({error: 'Email is already in use'})
+  };
+
+  const isValidPassword = await bcrypt.compare(
+    req.body.password,
+    existingUser.password
+  );
+  if(!isValidPassword) {
+    return res.status(400).json({error: 'Password is already in use'})
+  }
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
     const createdUser = await User.create({
-        username: body.username,
-        email: body.email,
-        password: body.password, 
-        firstname: body.firstname,
-        lastname: body.lastname,
-        address: body.address, 
-        role: body.role || "signed",
+        username: req.body.username,
+        email: req.body.email,
+        password: hashedPassword, 
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        address: req.body.address, 
+        role: req.body.role || "signed",
     });
-    res.json(createdUser)
+    res.status(201).json(createdUser)
 };
 
 export async function updatedUser(req, res) {
-    const userId = req.params.id;
-    const body = req.body;
+    const userId = Number.parseInt(req.params.id, 10);
+    if(isNaN(userId)){
+        return res.status(400).json({error: 'Menu ID should be a valid integer'})
+    };
     const user = await User.findByPk(userId);
+    if(!user){
+        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+    };
+
+    const updateUserSchema = Joi.object({
+        username: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30)
+        .required(),
+
+        firstname: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30)
+        .required(),
+
+        lastname: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30)
+        .required(),
+
+        address: Joi.string()
+        .min(3)
+        .max(200)
+        .required(),
+
+        role: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30),
+
+        email: Joi.string()
+        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'fr'] } }) ,
+    })
+
+  const { error } = updateUserSchema.validate(req.body);
+  if (error) { return res.status(400).json({ error: error.message }); }
+
+  if (req.body.password !== req.body.passwordConfirm) {
+    return res.status(400).json({error: 'Passwords do not match'})
+  };
+
+  const existingUser = await User.findOne({ where: { email } });
+  if (existingUser) {
+    return res.status(400).json({error: 'Email is already in use'})
+  };
+
+  const isValidPassword = await bcrypt.compare(
+    req.body.password,
+    existingUser.password
+  );
+  
+  if(!isValidPassword) {
+    return res.status(400).json({error: 'Password is already in use'})
+  }
+
     const updatedUser = await user.update({
-        username: body.username,
-        email: body.email,
-        password: body.password, 
-        firstname: body.firstname,
-        lastname: body.lastname,
-        address: body.address, 
-        role: body.role
+        username: req.body.username,
+        email: req.body.email,
+        password: hashedPassword, 
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        address: req.body.address, 
+        role: req.body.role,
     });
-    res.json(updatedUser);
+    res.status(200).json(updatedUser);
 };
 
 export async function deletedUser(req, res) {
-    const userId = req.params.id;
+    const userId = Number.parseInt(req.params.id, 10);
+    if(isNaN(userId)){
+        return res.status(400).json({error: 'Menu ID should be a valid integer'})
+    };
     const user = await User.findByPk(userId);
-    const deletedUser = await user.destroy();
-    res.json(deletedUser);
+    if(!user){
+        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+    };
+    await user.destroy();
+    res.status(204).end();
 }

@@ -5,6 +5,9 @@ export async function getAllMenus(req, res) {
     const menus = await Menu.findAll({
         include: ['plats','drinks','desserts']
     });
+    if(!menus){
+        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+    };
     res.status(200).json(menus)
 };
 

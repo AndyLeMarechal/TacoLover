@@ -3,6 +3,9 @@ import Joi from 'joi';
 
 export async function getAllDrinks(req, res) {
     const drinks = await Drink.findAll();
+    if(!drinks){
+        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+    };
     res.status(200).json(drinks);
 };
 
