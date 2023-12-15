@@ -13,8 +13,7 @@ Dessert.init({
         allowNull: false
     },
     img: {
-        type: DataTypes.TEXT,
-        allowNull: false
+        type: DataTypes.TEXT
     }
 },{
     sequelize,

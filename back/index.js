@@ -7,7 +7,7 @@ import express from "express";
 
 // Import local dependencies
 import { router as apiRouter } from "./src/routers/index.js";
-// import { bodySanitizer } from "./middlewares/body-sanitizer.js";
+import { bodySanitizer } from "./middlewares/body-sanitizer.js";
 
 // Create Express App
 const app = express();
@@ -21,7 +21,7 @@ app.use(express.json()); // Ce body parser parse les body au format application/
 
 
 // (BONUS) Generalisation du contrôle des inputs contre les potentielles injections XSS
-// app.use(bodySanitizer);
+app.use(bodySanitizer);
 
 
 // Configure Express app
