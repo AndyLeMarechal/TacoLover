@@ -140,9 +140,13 @@ export async function updatedUser(req, res) {
   if (req.body.password !== req.body.passwordConfirm) {
     return res.status(400).json({error: 'Passwords do not match'})
   };
+  const existingUser = await User.findOne({ where: { email: req.body.email } });
+  const isValidPassword = await bcrypt.compare(
+    req.body.password,
+    existingUser.password
+  );
 
-  const existingPassword = await User.findOne({where: {password: req.body.password} });
-  if(existingPassword) {
+  if(isValidPassword) {
     return res.status(400).json({error: 'Password is already in use'})
   }
 
