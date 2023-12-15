@@ -2,7 +2,8 @@ import { Drink } from "../models/index.js";
 import Joi from 'joi';
 
 export async function getAllDrinks(req, res) {
-  const drinks = await Drink.findAll();
+  const drinks = await Drink.findAll({
+    order: ["id"],});
   if(!drinks){
     return res.status(404).json({error: '/drinks not found'});
   }
@@ -15,7 +16,8 @@ export async function getOneDrink(req, res) {
     return res.status(400).json({error: 'Drink ID should be a valid integer'});
   }
 
-  const drink = await Drink.findByPk(drinkId);
+  const drink = await Drink.findByPk(drinkId,{
+    order: ["id"],});
   if(!drink){
     return res.status(404).json({error: 'Drink not found. Please verify the provided id.'});
   }
@@ -59,7 +61,7 @@ export async function updatedDrink(req, res) {
     return res.status(400).json({error: 'Drink ID should be a valid integer'});
   }
 
-  const drink = await Drink.findByPk(drinkId);
+  const drink = await Drink.findByPk(drinkId,);
   if(!drink){
     return res.status(404).json({error: 'Drink not found. Please verify the provided id.'});
   }

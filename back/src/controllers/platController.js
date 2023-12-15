@@ -3,6 +3,7 @@ import Joi from 'joi';
 
 export async function getAllPlats(req, res) {
   const plats = await Plat.findAll({
+    order: ["id"],
     include: 'tags'
   });
   if(!plats){
@@ -16,7 +17,8 @@ export async function getOnePlat(req, res) {
   if(isNaN(platId)){
     return res.status(400).json({error: 'Plat ID should be a valid integer'});
   }
-  const plat = await Plat.findByPk(platId);
+  const plat = await Plat.findByPk(platId,{
+    order: ["id"],});
   if(!plat){
     return res.status(404).json({error: 'Plat not found. Please verify the provided id.'});
   }

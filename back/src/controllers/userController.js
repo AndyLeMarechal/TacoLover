@@ -3,7 +3,8 @@ import Joi from 'joi';
 import bcrypt from "bcrypt";
 
 export async function getAllUsers(req, res) {
-  const users = await User.findAll();
+  const users = await User.findAll({
+    order: ["id"],});
   if(!users){
     return res.status(404).json({error: '/users not found.'});
   }
@@ -15,7 +16,9 @@ export async function getOneUser(req, res) {
   if(isNaN(userId)){
     return res.status(400).json({error: 'User ID should be a valid integer'});
   }
-  const user = await User.findByPk(userId);
+  const user = await User.findByPk(userId,{
+    order: ["id"],
+  });
   if(!user){
     return res.status(404).json({error: 'User not found. Please verify the provided id.'});
   }

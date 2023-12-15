@@ -2,7 +2,8 @@ import { Restaurant } from "../models/index.js";
 import Joi from 'joi';
 
 export async function getAllRestaurants(req, res) {
-  const restaurants = await Restaurant.findAll();
+  const restaurants = await Restaurant.findAll({
+    order: ["id"],});
   if(!restaurants){
     return res.status(404).json({error: '/restaurants not found.'});
   }
@@ -14,7 +15,8 @@ export async function getOneRestaurant(req, res) {
   if(isNaN(restaurantId)){
     return res.status(400).json({error: 'Restaurant ID should be a valid integer'});
   }
-  const restaurant = await Restaurant.findByPk(restaurantId);
+  const restaurant = await Restaurant.findByPk(restaurantId,{
+    order: ["id"],});
   if(!restaurant){
     return res.status(404).json({error: 'Restaurant not found. Please verify the provided id.'});
   }

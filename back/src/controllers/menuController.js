@@ -3,6 +3,7 @@ import Joi from 'joi';
 
 export async function getAllMenus(req, res) {
   const menus = await Menu.findAll({
+    order: ["id"],
     include: ['plats','drinks','desserts']
   });
   if(!menus){
@@ -17,6 +18,7 @@ export async function getOneMenu(req, res) {
     return res.status(400).json({error: 'Menu ID should be a valid integer'});
   }
   const menu = await Menu.findByPk(menuId, {
+    order: ["id"],
     include: ['plats','drinks','desserts']
   });
   if(!menu){

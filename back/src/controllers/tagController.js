@@ -2,7 +2,8 @@ import { Tag } from "../models/index.js";
 import Joi from 'joi';
 
 export async function getAllTags(req, res) {
-  const tags = await Tag.findAll();
+  const tags = await Tag.findAll({
+    order: ["id"],});
   if(!tags){
     return res.status(404).json({error: '/tags not found.'});
   }
@@ -14,7 +15,9 @@ export async function getOneTag(req, res) {
   if(isNaN(tagId)){
     return res.status(400).json({error: 'Tag ID should be a valid integer'});
   }
-  const tag = await Tag.findByPk(tagId);
+  const tag = await Tag.findByPk(tagId, {
+    order: ["id"],
+  });
   if(!tag){
     return res.status(404).json({error: 'Tag not found. Please verify the provided id.'});
   }

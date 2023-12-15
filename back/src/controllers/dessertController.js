@@ -2,7 +2,8 @@ import { Dessert } from "../models/Dessert.js";
 import Joi from 'joi';
 
 export async function getAllDesserts(req, res) {
-  const desserts = await Dessert.findAll();
+  const desserts = await Dessert.findAll({
+    order: ["id"],});
   if(!desserts){
     return res.status(404).json({error: '/desserts not found'});
   }
@@ -15,7 +16,8 @@ export async function getOneDessert(req, res) {
     return res.status(400).json({error: 'Dessert ID should be a valid integer'});
   }
 
-  const dessert = await Dessert.findByPk(dessertId);
+  const dessert = await Dessert.findByPk(dessertId,{
+    order: ["id"],});
   if(!dessert){
     return res.status(404).json({error: 'Dessert not found. Please verify the provided id.'});
   }
