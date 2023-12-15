@@ -40,8 +40,8 @@ export async function createdDessert(req, res) {
 
     const createdDessert = await Dessert.create({
         title: req.body.title,
-        price: req.body.body.price || "€" ,
-        img: req.body.body.img || "."
+        price: req.body.price || "€" ,
+        img: req.body.img || "."
     })
     res.status(201).json(createdDessert);
 };
@@ -77,8 +77,8 @@ export async function updatedDessert(req, res) {
 
     const updatedDessert = await dessert.update({
         title: req.body.title,
-        price: req.body.body.price,
-        img: req.body.body.img
+        price: req.body.price + "€",
+        img: req.body.img
     });
     res.status(200).json(updatedDessert);
 };

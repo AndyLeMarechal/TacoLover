@@ -42,10 +42,10 @@ export async function createdDrink(req, res) {
   if (error) { return res.status(400).json({ error: error.message }); }
 
     const createdDrink = await Drink.create({
-        title: body.title,
-        soft: body.soft,
-        price: body.price ||"€" ,
-        img: body.img || "."
+        title: req.body.title,
+        soft: req.body.soft,
+        price: req.body.price ||"€" ,
+        img: req.body.img || "."
     });
     res.status(201).json(createdDrink);
 };
@@ -82,10 +82,10 @@ export async function updatedDrink(req, res) {
   if (error) { return res.status(400).json({ error: error.message }); }
 
     const updatedDrink = await drink.update({
-        title: body.title,
-        soft: body.soft,
-        price: body.price ,
-        img: body.img
+        title: req.body.title,
+        soft: req.body.soft,
+        price: req.body.price + "€" ,
+        img: req.body.img
     });
     res.status(200).json(updatedDrink);
 };
