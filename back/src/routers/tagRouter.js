@@ -1,4 +1,4 @@
-import { Router } from "express"
+import { Router } from "express";
 
 import * as tagController from "../controllers/tagController.js";
 

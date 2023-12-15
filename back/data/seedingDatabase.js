@@ -84,30 +84,28 @@ async function seedDatabase() {
 
 
   // Create User
-  const user1 = await User.create(
-    {username: 'MiguelTL', email: 'Miguel@tacolover.io', password: '123456', firstname:'Miguel', lastname: 'Tacolover', address: '.', role: 'Admin'});
+  await User.create(
+    {username: 'MiguelTL', email: 'Miguel@tacolover.io', password: '123456', firstname:'Miguel', lastname: 'Tacolover', address: '.', role: 'Admin'},
 
-  const user2 = await User.create(
-    {username: 'ViolettaTL', email: 'Violetta@tacolover.io', password: '54321', firstname:'Violetta', lastname: 'Tacolover', address: '.', role: 'Editor'});
+    {username: 'ViolettaTL', email: 'Violetta@tacolover.io', password: '54321', firstname:'Violetta', lastname: 'Tacolover', address: '.', role: 'Editor'},
 
-  const user3 = await User.create(   
     {username: 'JeanDuPuis', email: 'JeanDuPuis@gmail.com', password: '56789', firstname:'Jean', lastname: 'Du Puis', address: '25 rue de la base de loisir, 92456 Clachy', role: 'Signed'});
 
 
   // Create User
-  const restaurant1 = await Restaurant.create(
-    {name: 'Taco Lover { La ville du bois }', address: '35 rue de la Croix Saint-Jacques 91620 La Ville du Bois'});
+  await Restaurant.create(
+    {name: 'Taco Lover { La ville du bois }', address: '35 rue de la Croix Saint-Jacques 91620 La Ville du Bois'},
 
-    const restaurant2 = await Restaurant.create(
-    {name: 'Taco Lover { Paris }', address: '6 Bd Poissonnière, 75009 Paris'});
 
-    const restaurant3 = await Restaurant.create(
+    {name: 'Taco Lover { Paris }', address: '6 Bd Poissonnière, 75009 Paris'},
+
+
     {name: 'Taco Lover { Nantes }', address: '13 Rue de Gorges, 44000 Nantes'});
 
-   // Create Tags
-   const promoTag = await Tag.create({ name: 'PROMO',       color: '#FF00FF' });
-   const bestProductTag   = await Tag.create({ name: 'BEST PRODUCT',    color: '#000000' });
-   const spicyTag    = await Tag.create({ name: 'SPICY', color: '#00FF00' });
+  // Create Tags
+  const promoTag = await Tag.create({ name: 'PROMO',       color: '#FF00FF' });
+  const bestProductTag   = await Tag.create({ name: 'BEST PRODUCT',    color: '#000000' });
+  const spicyTag    = await Tag.create({ name: 'SPICY', color: '#00FF00' });
 
   // Add Plat to Menu
   await MenuHasPlat(menu1.id, plat1.id);
@@ -189,24 +187,24 @@ async function seedDatabase() {
   
   console.log("🧹 Clean up by closing database connexion");
   await sequelize.close();
-};
+}
 
 async function MenuHasPlat(menuId, platId) {
   const menu = await Menu.findOne({where: {id: menuId}});
   await menu.addPlat(platId);
-};
+}
 
 async function MenuHasDrink(menuId, drinkId) {
-    const menu = await Menu.findOne({ where: { id: menuId }});
-    await menu.addDrink(drinkId);
-  };
+  const menu = await Menu.findOne({ where: { id: menuId }});
+  await menu.addDrink(drinkId);
+}
 
-  async function MenuHasDessert(menuId, dessertId) {
-    const menu = await Menu.findOne({ where: { id: menuId }});
-    await menu.addDessert(dessertId);
-  };
+async function MenuHasDessert(menuId, dessertId) {
+  const menu = await Menu.findOne({ where: { id: menuId }});
+  await menu.addDessert(dessertId);
+}
 
-  async function platHasTag(platId, TagId) {
-    const plat = await Plat.findOne({ where: { id: platId }});
-    await plat.addTag(TagId);
-  };
+async function platHasTag(platId, TagId) {
+  const plat = await Plat.findOne({ where: { id: platId }});
+  await plat.addTag(TagId);
+}

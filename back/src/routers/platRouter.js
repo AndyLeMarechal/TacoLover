@@ -1,4 +1,4 @@
-import { Router } from "express"
+import { Router } from "express";
 
 import * as platController from "../controllers/platController.js";
 

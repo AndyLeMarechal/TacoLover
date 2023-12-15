@@ -4,15 +4,15 @@ import { Model, DataTypes } from "sequelize";
 export class Restaurant extends Model {}
 
 Restaurant.init({
-    name: {
-        type: DataTypes.TEXT,
-        allowNull: false
-    },
-    address: {
-        type: DataTypes.TEXT,
-        allowNull: false
-    },
+  name: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  address: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
 },{
-    sequelize,
+  sequelize,
   tableName: "restaurant"
-})
+});
