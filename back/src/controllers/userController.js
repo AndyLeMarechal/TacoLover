@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 export async function getAllUsers(req, res) {
     const users = await User.findAll();
     if(!users){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: '/users not found.'})
     };
     res.status(200).json(users);
 };
@@ -13,11 +13,11 @@ export async function getAllUsers(req, res) {
 export async function getOneUser(req, res) {
     const userId = Number.parseInt(req.params.id, 10);
     if(isNaN(userId)){
-        return res.status(400).json({error: 'Menu ID should be a valid integer'})
+        return res.status(400).json({error: 'User ID should be a valid integer'})
     };
     const user = await User.findByPk(userId);
     if(!user){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: 'User not found. Please verify the provided id.'})
     };
     res.status(200).json(user);
 };
@@ -29,6 +29,11 @@ export async function createdUser(req, res) {
         .min(3)
         .max(30)
         .required(),
+
+        password: Joi.string()
+        .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+
+        passwordConfirm: Joi.ref('password'),
 
         firstname: Joi.string()
         .alphanum()
@@ -63,18 +68,10 @@ export async function createdUser(req, res) {
     return res.status(400).json({error: 'Passwords do not match'})
   };
 
-  const existingUser = await User.findOne({ where: { email } });
+  const existingUser = await User.findOne({ where: { email: req.body.email } });
   if (existingUser) {
     return res.status(400).json({error: 'Email is already in use'})
   };
-
-  const isValidPassword = await bcrypt.compare(
-    req.body.password,
-    existingUser.password
-  );
-  if(!isValidPassword) {
-    return res.status(400).json({error: 'Password is already in use'})
-  }
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     const createdUser = await User.create({
@@ -92,11 +89,11 @@ export async function createdUser(req, res) {
 export async function updatedUser(req, res) {
     const userId = Number.parseInt(req.params.id, 10);
     if(isNaN(userId)){
-        return res.status(400).json({error: 'Menu ID should be a valid integer'})
+        return res.status(400).json({error: 'User ID should be a valid integer'})
     };
     const user = await User.findByPk(userId);
     if(!user){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: 'User not found. Please verify the provided id.'})
     };
 
     const updateUserSchema = Joi.object({
@@ -105,6 +102,11 @@ export async function updatedUser(req, res) {
         .min(3)
         .max(30)
         .required(),
+
+        password: Joi.string()
+        .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+
+        passwordConfirm: Joi.ref('password'),
 
         firstname: Joi.string()
         .alphanum()
@@ -139,19 +141,12 @@ export async function updatedUser(req, res) {
     return res.status(400).json({error: 'Passwords do not match'})
   };
 
-  const existingUser = await User.findOne({ where: { email } });
-  if (existingUser) {
-    return res.status(400).json({error: 'Email is already in use'})
-  };
-
-  const isValidPassword = await bcrypt.compare(
-    req.body.password,
-    existingUser.password
-  );
-  
-  if(!isValidPassword) {
+  const existingPassword = await User.findOne({where: {password: req.body.password} });
+  if(existingPassword) {
     return res.status(400).json({error: 'Password is already in use'})
   }
+
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     const updatedUser = await user.update({
         username: req.body.username,
@@ -168,11 +163,11 @@ export async function updatedUser(req, res) {
 export async function deletedUser(req, res) {
     const userId = Number.parseInt(req.params.id, 10);
     if(isNaN(userId)){
-        return res.status(400).json({error: 'Menu ID should be a valid integer'})
+        return res.status(400).json({error: 'User ID should be a valid integer'})
     };
     const user = await User.findByPk(userId);
     if(!user){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: 'User not found. Please verify the provided id.'})
     };
     await user.destroy();
     res.status(204).end();

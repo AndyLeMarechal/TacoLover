@@ -6,7 +6,7 @@ export async function getAllMenus(req, res) {
         include: ['plats','drinks','desserts']
     });
     if(!menus){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: '/menus not found.'})
     };
     res.status(200).json(menus)
 };

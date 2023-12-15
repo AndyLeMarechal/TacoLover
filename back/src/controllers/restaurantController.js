@@ -4,7 +4,7 @@ import Joi from 'joi';
 export async function getAllRestaurants(req, res) {
     const restaurants = await Restaurant.findAll();
     if(!restaurants){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: '/restaurants not found.'})
     };
     res.status(200).json(restaurants);
 };
@@ -12,11 +12,11 @@ export async function getAllRestaurants(req, res) {
 export async function getOneRestaurant(req, res) {
     const restaurantId = Number.parseInt(req.params.id, 10);
     if(isNaN(restaurantId)){
-        return res.status(400).json({error: 'Menu ID should be a valid integer'})
+        return res.status(400).json({error: 'Restaurant ID should be a valid integer'})
     };
     const restaurant = await Restaurant.findByPk(restaurantId);
     if(!restaurant){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: 'Restaurant not found. Please verify the provided id.'})
     };
     res.status(200).json(restaurant);
 };
@@ -47,11 +47,11 @@ export async function createdRestaurant(req, res) {
 export async function updatedRestaurant(req, res) {
     const restaurantId = Number.parseInt(req.params.id, 10);
     if(isNaN(restaurantId)){
-        return res.status(400).json({error: 'Menu ID should be a valid integer'})
+        return res.status(400).json({error: 'Restaurant ID should be a valid integer'})
     };
     const restaurant = await Restaurant.findByPk(restaurantId);
     if(!restaurant){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: 'Restaurant not found. Please verify the provided id.'})
     };
 
     const updateRestaurantSchema = Joi.object({
@@ -79,11 +79,11 @@ export async function updatedRestaurant(req, res) {
 export async function deletedRestaurant(req, res) {
     const restaurantId = Number.parseInt(req.params.id, 10);
     if(isNaN(restaurantId)){
-        return res.status(400).json({error: 'Menu ID should be a valid integer'})
+        return res.status(400).json({error: 'Restaurant ID should be a valid integer'})
     };
     const restaurant = await Restaurant.findByPk(restaurantId);
     if(!restaurant){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: 'Restaurant not found. Please verify the provided id.'})
     };
     await restaurant.destroy();
     res.status(204).end();

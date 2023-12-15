@@ -4,7 +4,7 @@ import Joi from 'joi';
 export async function getAllTags(req, res) {
     const tags = await Tag.findAll();
     if(!tags){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: '/tags not found.'})
     };
     res.status(200).json(tags);
 };
@@ -12,11 +12,11 @@ export async function getAllTags(req, res) {
 export async function getOneTag(req, res) {
     const tagId = Number.parseInt(req.params.id, 10);
     if(isNaN(tagId)){
-        return res.status(400).json({error: 'Menu ID should be a valid integer'})
+        return res.status(400).json({error: 'Tag ID should be a valid integer'})
     };
     const tag = await Tag.findByPk(tagId);
     if(!tag){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: 'Tag not found. Please verify the provided id.'})
     };
     res.status(200).json(tag);
 };
@@ -45,11 +45,11 @@ export async function createdTag(req, res) {
 export async function updatedTag(req, res) {
     const tagId = Number.parseInt(req.params.id, 10);
     if(isNaN(tagId)){
-        return res.status(400).json({error: 'Menu ID should be a valid integer'})
+        return res.status(400).json({error: 'Tag ID should be a valid integer'})
     };
     const tag = await Tag.findByPk(tagId);
     if(!tag){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: 'Tag not found. Please verify the provided id.'})
     };
     const updateTagSchema = Joi.object({
         name: Joi.string()
@@ -73,11 +73,11 @@ export async function updatedTag(req, res) {
 export async function deletedTag(req, res) {
     const tagId = Number.parseInt(req.params.id, 10);
     if(isNaN(tagId)){
-        return res.status(400).json({error: 'Menu ID should be a valid integer'})
+        return res.status(400).json({error: 'Tag ID should be a valid integer'})
     };
     const tag = await Tag.findByPk(tagId);
     if(!tag){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: 'Tag not found. Please verify the provided id.'})
     };
     await tag.destroy();
     res.status(201).end();

@@ -6,7 +6,7 @@ export async function getAllPlats(req, res) {
         include: 'tags'
     })
     if(!plats){
-        return res.status(404).json({error: 'Menu not found. Please verify the provided id.'})
+        return res.status(404).json({error: '/plats not found.'})
     };
     res.status(200).json(plats)
 };
