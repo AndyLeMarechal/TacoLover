@@ -1,8 +1,8 @@
 import { User } from "../models/index.js";
 import Joi from 'joi';
 import { joiPasswordExtendCore } from 'joi-password';
-const joiPassword = Joi.extend(joiPasswordExtendCore);
 import bcrypt from "bcrypt";
+const joiPassword = Joi.extend(joiPasswordExtendCore);
 
 export async function getAllUsers(req, res) {
   const users = await User.findAll({
