@@ -27,16 +27,14 @@ export async function getOneDrink(req, res) {
 
 export async function createdDrink(req, res) {
   const createDrinkSchema = Joi.object({
+    soft: Joi.boolean(),
+
     title: Joi.string()
-      .alphanum()
       .min(3)
       .max(40)
       .required(),
 
-    soft: Joi.boolean(),
-
-    price: Joi.string()
-      .alphanum()
+    price_in_euro: Joi.number()
       .min(1)
       .max(4)
       .required(),
@@ -49,7 +47,7 @@ export async function createdDrink(req, res) {
   const createdDrink = await Drink.create({
     title: req.body.title,
     soft: req.body.soft,
-    price: req.body.price ||'.' ,
+    price_in_euro: req.body.price_in_euro || '0' ,
     img: req.body.img || "."
   });
   res.status(201).json(createdDrink);
@@ -67,16 +65,14 @@ export async function updatedDrink(req, res) {
   }
 
   const updateDrinkSchema = Joi.object({
+    soft: Joi.boolean(),
+
     title: Joi.string()
-      .alphanum()
       .min(3)
       .max(40)
       .required(),
 
-    soft: Joi.boolean(),
-
-    price: Joi.string()
-      .alphanum()
+    price_in_euro: Joi.number()
       .min(1)
       .max(4)
       .required(),
@@ -89,7 +85,7 @@ export async function updatedDrink(req, res) {
   const updatedDrink = await drink.update({
     title: req.body.title,
     soft: req.body.soft,
-    price: req.body.price + '.' ,
+    price_in_euro: req.body.price_in_euro,
     img: req.body.img
   });
   res.status(200).json(updatedDrink);

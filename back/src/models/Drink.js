@@ -12,7 +12,7 @@ Drink.init({
     type: DataTypes.BOOLEAN,
     allowNull: false
   },
-  price: {
+  price_in_euro: {
     type: DataTypes.TEXT,
     allowNull: false
   },

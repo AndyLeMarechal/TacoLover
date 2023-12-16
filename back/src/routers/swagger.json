@@ -1,0 +1,167 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "TacoLover",
+      "description": "TacoLover pour les amoureux des plats mexicain",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": { "name": "TacoLover" },
+      "license": { "name": "MIT" }
+    },
+  
+    "host": "localhost:3000",
+    "basePath": "/api",
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "tags": [
+      { "name": "Dessert", "description": "Dessert de TacoLover" }
+    ],
+    "paths": {
+  
+      "/desserts": {
+  
+        "get": {
+          "tags": ["Dessert"],
+          "description": "Retourne l'ensemble des Desserts existantes",
+          "operationId": "getAllDesserts",
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Un tableau de Desserts",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Dessert"
+                }
+              }
+            },
+            "404": {
+                "description": "Le nom de la route na pas été trouver",
+                "schema": {
+                  "properties": {
+                    "error": { "type": "string", "example": "/desserts not found" }
+                  }
+                }
+            }
+          }
+        },
+  
+        "post": {
+          "tags": ["Dessert"],
+          "description": "Créer un nouveau Dessert",
+          "operationId": "createdDessert",
+          "produces": ["application/json"],
+          "consumes": ["application/x-www-form-urlencoded"],
+          "parameters": [{
+            "in": "body",
+            "description": "Information des Desserts",
+            "schema": {
+              "type": "object",
+              "required": ["title","price_in_euro"],
+              "properties": {
+                "title": { "type": "string", "example": "Nom du Dessert" },
+                "price_in_euro": { "type": "string", "example": "15€" },
+                "img": { "type": "string", "example": "dataUri" }
+              }
+            }
+          }],
+          "responses": {
+            "200": {
+              "description": "Le Dessert a bien été créer",
+              "schema": {
+                "$ref": "#/definitions/Dessert"
+              }
+            },
+            "400": {
+              "description": "Le Dessert na pas pu etre creér",
+              "schema": {
+                "properties": {
+                  "error": { "type": "string", "example": "Joi error message" }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/desserts/:id": {
+  
+        "patch": {
+          "tags": ["Dessert"],
+          "description": "Modifier un Dessert existante",
+          "operationId": "updatedDessert",
+          "produces": ["application/json"],
+          "consumes": ["application/x-www-form-urlencoded"],
+          "parameters": [
+            {
+              "in": "paths",
+              "name": "id",
+              "description": "L'ID du Dessert à modifier",
+              "type": "integer"
+            },
+            {
+            "in": "body",
+            "description": "Champs à modifier",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": { "type": "string", "example": "Nom du Dessert" },
+                "price_in_euro": { "type": "string", "example": "15€" },
+                "img": { "type": "string", "example": "dataUri" }
+              }
+            }
+          }],
+          "responses": {
+            "200": {
+              "description": "Le Desserts à été mis à jour",
+              "schema": {
+                "$ref": "#/definitions/Dessert",
+                "example": "coucou"
+              }
+            },
+            "400": {
+              "description": "L'ID fourni n'est pas un nombre'",
+              "schema": {
+                "properties": {
+                  "error": { "type": "string", "example": "Dessert ID should be a valid integer" }
+                }
+              }
+            },
+            "404": {
+                "description": "L'ID fourni ne correspond à aucune Desserts",
+                "schema": {
+                  "properties": {
+                    "error": { "type": "string", "example": "Dessert not found. Please verify the provided id." }
+                  }
+                }
+            }
+          }
+        }
+      }
+    },
+  
+  
+    "definitions": {
+  
+      "Dessert": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "example": 1 },
+          "title": { "type": "string", "example": "Nom du Dessert" },
+          "price_in_euro": { "type": "string", "example": "15€" },
+          "img": { "type": "string", "example": "dataUri" },
+          "created_at": { "type": "string", "format": "date-time", "example": "2022-01-01T12:00:00.000Z" },
+          "updated_at": { "type": "string", "format": "date-time", "example": "2022-01-01T12:00:00.000Z" }
+        }
+      },
+  
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string", "example": "Unexpected server error. Please try again later." }
+        }
+      }
+    }
+  }
+  

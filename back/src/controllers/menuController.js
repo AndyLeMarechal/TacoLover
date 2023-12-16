@@ -30,20 +30,18 @@ export async function getOneMenu(req, res) {
 export async function createdMenu(req, res) {
   const createMenuSchema = Joi.object({
     title: Joi.string()
-      .alphanum()
       .min(3)
       .max(40)
+      .required(),
+
+    price_in_euro: Joi.number()
+      .min(1)
+      .max(4)
       .required(),
 
     description: Joi.string()
       .min(3)
       .max(200)
-      .required(),
-
-    price: Joi.string()
-      .alphanum()
-      .min(1)
-      .max(4)
       .required(),
 
     img: Joi.string().empty('').dataUri()
@@ -54,7 +52,7 @@ export async function createdMenu(req, res) {
   const menu = await Menu.create({
     title: req.body.title,
     description: req.body.description,
-    price: req.body.price + '.' || '.' ,
+    price_in_euro: req.body.price_in_euro || '0' , 
     img: req.body.img || "."
   });
   res.status(201).json(menu);
@@ -71,20 +69,18 @@ export async function updatedMenu(req, res) {
   }
   const updateMenuSchema = Joi.object({
     title: Joi.string()
-      .alphanum()
       .min(3)
       .max(40)
+      .required(),
+
+    price_in_euro: Joi.number()
+      .min(1)
+      .max(4)
       .required(),
 
     description: Joi.string()
       .min(3)
       .max(200)
-      .required(),
-
-    price: Joi.string()
-      .alphanum()
-      .min(1)
-      .max(4)
       .required(),
 
     img: Joi.string().empty('').dataUri()
@@ -95,7 +91,7 @@ export async function updatedMenu(req, res) {
   const updatedMenu = await menu.update({
     title: req.body.title,
     description: req.body.description,
-    price: req.body.price + '.',
+    price_in_euro: req.body.price_in_euro ,
     img: req.body.img
   });
 

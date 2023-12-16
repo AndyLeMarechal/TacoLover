@@ -12,7 +12,7 @@ Menu.init({
     type: DataTypes.TEXT,
     allowNull: false
   },
-  price: {
+  price_in_euro: {
     type: DataTypes.TEXT,
     allowNull: false
   },

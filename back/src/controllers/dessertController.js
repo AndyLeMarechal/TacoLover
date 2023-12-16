@@ -27,13 +27,11 @@ export async function getOneDessert(req, res) {
 export async function createdDessert(req, res) {
   const createDessertSchema = Joi.object({
     title: Joi.string()
-      .alphanum()
       .min(3)
       .max(40)
       .required(),
 
-    price: Joi.string()
-      .alphanum()
+    price_in_euro: Joi.number()
       .min(1)
       .max(4)
       .required(),
@@ -45,7 +43,7 @@ export async function createdDessert(req, res) {
 
   const createdDessert = await Dessert.create({
     title: req.body.title,
-    price: req.body.price || "." ,
+    price_in_euro: req.body.price_in_euro || "0" ,
     img: req.body.img || "."
   });
   res.status(201).json(createdDessert);
@@ -64,13 +62,11 @@ export async function updatedDessert(req, res) {
 
   const updateDessertSchema = Joi.object({
     title: Joi.string()
-      .alphanum()
       .min(3)
       .max(40)
       .required(),
 
-    price: Joi.string()
-      .alphanum()
+    price_in_euro: Joi.number()
       .min(1)
       .max(4)
       .required(),
@@ -82,7 +78,7 @@ export async function updatedDessert(req, res) {
 
   const updatedDessert = await dessert.update({
     title: req.body.title,
-    price: req.body.price + '.',
+    price_in_euro: req.body.price_in_euro,
     img: req.body.img
   });
   res.status(200).json(updatedDessert);

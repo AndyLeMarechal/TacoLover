@@ -27,19 +27,17 @@ export async function getOnePlat(req, res) {
 
 export async function createdPlat(req, res) {
   const createPlatSchema = Joi.object({
-    title: Joi.string()
-      .alphanum()
-      .min(3)
-      .max(40)
-      .required(),
-
     description: Joi.string()
       .min(3)
       .max(200)
       .required(),
 
-    price: Joi.string()
-      .alphanum()
+    title: Joi.string()
+      .min(3)
+      .max(40)
+      .required(),
+
+    price_in_euro: Joi.number()
       .min(1)
       .max(4)
       .required(),
@@ -52,7 +50,7 @@ export async function createdPlat(req, res) {
   const createdPlat = await Plat.create({
     title: req.body.title,
     description: req.body.description,
-    price: req.body.price ||'.' ,
+    price_in_euro: req.body.price_in_euro ||'.' ,
     img: req.body.img || "." 
   });
   res.status(201).json(createdPlat);
@@ -69,19 +67,17 @@ export async function updatedPlat(req, res) {
   }
 
   const updatePlatSchema = Joi.object({
-    title: Joi.string()
-      .alphanum()
-      .min(3)
-      .max(40)
-      .required(),
-
     description: Joi.string()
       .min(3)
       .max(200)
       .required(),
 
-    price: Joi.string()
-      .alphanum()
+    title: Joi.string()
+      .min(3)
+      .max(40)
+      .required(),
+
+    price_in_euro: Joi.number()
       .min(1)
       .max(4)
       .required(),
@@ -94,7 +90,7 @@ export async function updatedPlat(req, res) {
   const updatedPlat = await plat.update({
     title: req.body.title,
     description: req.body.description,
-    price: req.body.price + '.',
+    price_in_euro: req.body.price_in_euro,
     img: req.body.img
   });
   res.status(200).json(updatedPlat);
