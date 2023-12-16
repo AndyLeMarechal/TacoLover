@@ -4,6 +4,7 @@ import Joi from 'joi';
 export async function getAllDesserts(req, res) {
   const desserts = await Dessert.findAll({
     order: ["id"],});
+  console.log(desserts);
   if(!desserts){
     return res.status(404).json({error: '/desserts not found'});
   }

@@ -26,7 +26,7 @@
       "/desserts": {
         "get": {
           "tags": ["Dessert"],
-          "description": "Retourne l'ensemble des desserts existantes",
+          "description": "Retourne l'ensemble des desserts existantes ordonné par leur id. \n \n ``` SELECT id, title, price_in_euro, img, created_at, updated_at FROM dessert AS Dessert ORDER BY Dessert.id```" ,
           "operationId": "getAllDesserts",
           "produces": ["application/json"],
           "responses": {
@@ -45,7 +45,7 @@
         }, 
         "post": {
           "tags": ["Dessert"],
-          "description": "Créer un nouveau Dessert",
+          "description": "Créer un nouveau Dessert. \n \n ```INSERT INTO dessert (id,title,price_in_euro,img,created_at,updated_at) VALUES (DEFAULT,$1,$2,$3,$4,$5) RETURNING id,title,price_in_euro,img,created_at,updated_at;```",
           "operationId": "createdDessert",
           "consumes": [
             "application/json"
@@ -86,7 +86,7 @@
       "/desserts/{id}": {
         "get": {
             "tags": ["Dessert"],
-            "description": "Retourn le dessert via son Id",
+            "description": "Retourn le dessert via son Id. \n \n ```SELECT id, title, price_in_euro, img, created_at, updated_at FROM dessert AS Dessert WHERE Dessert.id = 1 ORDER BY Dessert.id;```",
             "operationId": "getOneDessert",
             "consumes": [
               "application/json"
@@ -125,7 +125,7 @@
         },
         "patch": {
           "tags": ["Dessert"],
-          "description": "Modifier un dessert existante",
+          "description": "Modifier un dessert existante. \n \n ```UPDATE dessert SET title=$1,price_in_euro=$2,updated_at=$3 WHERE id = $4```",
           "operationId": "updatedDessert",
           "consumes": [
             "application/json"
@@ -177,7 +177,7 @@
         },
         "delete": {
         "tags": ["Dessert"],
-        "description": "Supprimer un dessert existant",
+        "description": "Supprimer un dessert existant. \n \n ```DELETE FROM dessert WHERE id = 1```",
         "operationId": "deletedDessert",
         "consumes": [
           "application/json"
