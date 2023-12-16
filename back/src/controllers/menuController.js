@@ -54,7 +54,7 @@ export async function createdMenu(req, res) {
   const menu = await Menu.create({
     title: req.body.title,
     description: req.body.description,
-    price: req.body.price + "€" || "€" ,
+    price: req.body.price + '.' || '.' ,
     img: req.body.img || "."
   });
   res.status(201).json(menu);
@@ -95,7 +95,7 @@ export async function updatedMenu(req, res) {
   const updatedMenu = await menu.update({
     title: req.body.title,
     description: req.body.description,
-    price: req.body.price + "€",
+    price: req.body.price + '.',
     img: req.body.img
   });
 

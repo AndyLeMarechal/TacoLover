@@ -52,7 +52,7 @@ export async function createdPlat(req, res) {
   const createdPlat = await Plat.create({
     title: req.body.title,
     description: req.body.description,
-    price: req.body.price ||"€" ,
+    price: req.body.price ||'.' ,
     img: req.body.img || "." 
   });
   res.status(201).json(createdPlat);
@@ -94,7 +94,7 @@ export async function updatedPlat(req, res) {
   const updatedPlat = await plat.update({
     title: req.body.title,
     description: req.body.description,
-    price: req.body.price + "€",
+    price: req.body.price + '.',
     img: req.body.img
   });
   res.status(200).json(updatedPlat);

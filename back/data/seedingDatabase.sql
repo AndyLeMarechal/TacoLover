@@ -4,45 +4,45 @@ BEGIN;
 
 
 INSERT INTO "menu"
-  ("id", "title", "description", "price", "img")
+  ("id", "title", "description", "price_in_euro", "img")
 VALUES
-  (1, 'Menu { Plat / Boisson / Dessert }', 'Menu complet', '€', '.'),
-  (2, 'Menu { Plat / Boisson ou Dessert }', 'Menu a choix', '€', '.'),
-  (3, 'Menu { Enfant }', 'Menu pour les petits', '€', '.')
+  (1, 'Menu { Plat / Boisson / Dessert }', 'Menu complet', '.', '.'),
+  (2, 'Menu { Plat / Boisson ou Dessert }', 'Menu a choix', '.', '.'),
+  (3, 'Menu { Enfant }', 'Menu pour les petits', '.', '.')
 ;
 
 INSERT INTO "plat"
-  ("id", "title", "description", "price", "img")
+  ("id", "title", "description", "price_in_euro", "img")
 VALUES
-  (1, 'Fajitas Boeuf', 'Rumsteak de bœuf, oignons et poivrons. Plat à confectionner soi-même, servi avec du fromage râpé, du guacamole et des tortillas.', '€', '.'),
-  (2, 'Fajitas Poulet', 'Escalope de poulet mariné aux épices mexicaines, oignons et poivrons. Plat à confectionner soi-même, servi avec du fromage râpé, du guacamole et des tortillas.', '€', '.'),
-  (3, 'Burritos poulet', 'Suprême de poulet sauté aux deux poivrons, épices mexicaines, fromage le tout enroulé dans une tortilla.', '€', '.'),
-  (4, 'Quesadillas de boeuf', 'Tortilla garnie de viande de bœuf hachée, poivrons rouges et verts, oignons, fromage et épices.', '€', '.'),
-  (5, 'Chili cone carne', 'Viande de bœuf hachée, duo de poivrons, haricots rouges, le tout légèrement relevé par des épices mexicaines et servi avec une quenelle de crème fraiche.', '€', '.')
+  (1, 'Fajitas Boeuf', 'Rumsteak de bœuf, oignons et poivrons. Plat à confectionner soi-même, servi avec du fromage râpé, du guacamole et des tortillas.', '.', '.'),
+  (2, 'Fajitas Poulet', 'Escalope de poulet mariné aux épices mexicaines, oignons et poivrons. Plat à confectionner soi-même, servi avec du fromage râpé, du guacamole et des tortillas.', '.', '.'),
+  (3, 'Burritos poulet', 'Suprême de poulet sauté aux deux poivrons, épices mexicaines, fromage le tout enroulé dans une tortilla.', '.', '.'),
+  (4, 'Quesadillas de boeuf', 'Tortilla garnie de viande de bœuf hachée, poivrons rouges et verts, oignons, fromage et épices.', '.', '.'),
+  (5, 'Chili cone carne', 'Viande de bœuf hachée, duo de poivrons, haricots rouges, le tout légèrement relevé par des épices mexicaines et servi avec une quenelle de crème fraiche.', '.', '.')
 ;
 
 INSERT INTO "drink"
-  ("id", "title", "soft", "price", "img")
+  ("id", "title", "soft", "price_in_euro", "img")
 VALUES
-  (1, 'Coca-cola', '1', '€', '.'),
-  (2, 'Coca-cola zéro', '1', '€', '.'),
-  (3, 'Coca-cola cherry', '1', '€', '.'),
-  (4, 'Ice tea', '1', '€', '.'),
-  (5, 'Oasis tropical', '1', '€', '.'),
-  (6, 'Oasis pomme cassis framboise', '1', '€', '.'),
-  (7, 'Corona', '0', '€', '.'),
-  (8, 'Desperados', '0', '€', '.'),
-  (9, 'Pinacolada', '0', '€', '.')
+  (1, 'Coca-cola', '1', '.', '.'),
+  (2, 'Coca-cola zéro', '1', '.', '.'),
+  (3, 'Coca-cola cherry', '1', '.', '.'),
+  (4, 'Ice tea', '1', '.', '.'),
+  (5, 'Oasis tropical', '1', '.', '.'),
+  (6, 'Oasis pomme cassis framboise', '1', '.', '.'),
+  (7, 'Corona', '0', '.', '.'),
+  (8, 'Desperados', '0', '.', '.'),
+  (9, 'Pinacolada', '0', '.', '.')
 ;
 
 INSERT INTO "dessert"
-  ("id", "title", "price", "img")
+  ("id", "title", "price_in_euro", "img")
 VALUES
-  (1, 'Tiramisu', '€', '.'),
-  (2, 'Fruit de saison', '€', '.'),
-  (3, 'Cookie double chocolat', '€', '.'),
-  (4, 'Compote de pomme', '€', '.'),
-  (5, 'Compote de poire', '€', '.')
+  (1, 'Tiramisu', '.', '.'),
+  (2, 'Fruit de saison', '.', '.'),
+  (3, 'Cookie double chocolat', '.', '.'),
+  (4, 'Compote de pomme', '.', '.'),
+  (5, 'Compote de poire', '.', '.')
 ;
 
 INSERT INTO "user"

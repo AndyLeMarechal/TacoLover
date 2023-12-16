@@ -49,7 +49,7 @@ export async function createdDrink(req, res) {
   const createdDrink = await Drink.create({
     title: req.body.title,
     soft: req.body.soft,
-    price: req.body.price ||"€" ,
+    price: req.body.price ||'.' ,
     img: req.body.img || "."
   });
   res.status(201).json(createdDrink);
@@ -89,7 +89,7 @@ export async function updatedDrink(req, res) {
   const updatedDrink = await drink.update({
     title: req.body.title,
     soft: req.body.soft,
-    price: req.body.price + "€" ,
+    price: req.body.price + '.' ,
     img: req.body.img
   });
   res.status(200).json(updatedDrink);

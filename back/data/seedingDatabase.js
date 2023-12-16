@@ -11,76 +11,76 @@ async function seedDatabase() {
 
   // Create Menu
   const menu1 = await Menu.create(
-    { title: 'Menu { Plat / Boisson / Dessert }', description: 'Menu complet', price:'€', img: '.' });
+    { title: 'Menu { Plat / Boisson / Dessert }', description: 'Menu complet', price_in_euro:'.', img: '.' });
 
   const menu2 = await Menu.create(
-    { title: 'Menu { Plat / Boisson ou Dessert }', description: 'Menu a choix', price:'€', img: '.' });
+    { title: 'Menu { Plat / Boisson ou Dessert }', description: 'Menu a choix', price_in_euro:'.', img: '.' });
 
   const menu3 = await Menu.create(
-    { title: 'Menu { Enfant }', description:'Menu pour les petits', price: '€', img: '.' });
+    { title: 'Menu { Enfant }', description:'Menu pour les petits', price_in_euro: '€', img: '.' });
 
 
   // Create Plat
   const plat1 = await Plat.create(
-    {title: 'Fajitas Boeuf', description: 'Rumsteak de bœuf, oignons et poivrons. Plat à confectionner soi-même, servi avec du fromage râpé, du guacamole et des tortillas.', price:'€', img: '.'});
+    {title: 'Fajitas Boeuf', description: 'Rumsteak de bœuf, oignons et poivrons. Plat à confectionner soi-même, servi avec du fromage râpé, du guacamole et des tortillas.', price_in_euro:'.', img: '.'});
 
   const plat2 = await Plat.create(
-    {title: 'Fajitas Poulet', description: 'Escalope de poulet mariné aux épices mexicaines, oignons et poivrons. Plat à confectionner soi-même, servi avec du fromage râpé, du guacamole et des tortillas.', price:'€', img: '.'});
+    {title: 'Fajitas Poulet', description: 'Escalope de poulet mariné aux épices mexicaines, oignons et poivrons. Plat à confectionner soi-même, servi avec du fromage râpé, du guacamole et des tortillas.', price_in_euro:'.', img: '.'});
 
   const plat3 = await Plat.create(    
-    {title: 'Burritos poulet', description: 'Suprême de poulet sauté aux deux poivrons, épices mexicaines, fromage le tout enroulé dans une tortilla.', price:'€', img: '.'});
+    {title: 'Burritos poulet', description: 'Suprême de poulet sauté aux deux poivrons, épices mexicaines, fromage le tout enroulé dans une tortilla.', price_in_euro:'.', img: '.'});
 
   const plat4 = await Plat.create( 
-    {title: 'Quesadillas de boeuf', description: 'Tortilla garnie de viande de bœuf hachée, poivrons rouges et verts, oignons, fromage et épices.', price:'€', img: '.'});
+    {title: 'Quesadillas de boeuf', description: 'Tortilla garnie de viande de bœuf hachée, poivrons rouges et verts, oignons, fromage et épices.', price_in_euro:'.', img: '.'});
 
   const plat5 = await Plat.create( 
-    {title: 'Chili cone carne', description: 'Viande de bœuf hachée, duo de poivrons, haricots rouges, le tout légèrement relevé par des épices mexicaines et servi avec une quenelle de crème fraiche.', price:'€', img: '.'});
+    {title: 'Chili cone carne', description: 'Viande de bœuf hachée, duo de poivrons, haricots rouges, le tout légèrement relevé par des épices mexicaines et servi avec une quenelle de crème fraiche.', price_in_euro:'.', img: '.'});
 
 
   // Create Drink
   const drink1 = await Drink.create(
-    {title: 'Coca-cola', soft: '1', price:'€', img: '.'});
+    {title: 'Coca-cola', soft: '1', price_in_euro:'.', img: '.'});
 
   const drink2 = await Drink.create(
-    {title: 'Coca-cola zéro', soft: '1', price:'€', img: '.'});
+    {title: 'Coca-cola zéro', soft: '1', price_in_euro:'.', img: '.'});
 
   const drink3 = await Drink.create(
-    {title: 'Coca-cola cherry', soft: '1', price:'€', img: '.'});
+    {title: 'Coca-cola cherry', soft: '1', price_in_euro:'.', img: '.'});
 
   const drink4 = await Drink.create(
-    {title: 'Ice tea', soft: '1', price:'€', img: '.'});
+    {title: 'Ice tea', soft: '1', price_in_euro:'.', img: '.'});
 
   const drink5 = await Drink.create(
-    {title: 'Oasis tropical', soft: '1', price:'€', img: '.'});
+    {title: 'Oasis tropical', soft: '1', price_in_euro:'.', img: '.'});
 
   const drink6 = await Drink.create(
-    {title: 'Oasis pomme cassis framboise', soft: '1', price:'€', img: '.'});
+    {title: 'Oasis pomme cassis framboise', soft: '1', price_in_euro:'.', img: '.'});
 
   const drink7 = await Drink.create(
-    {title: 'Corona', soft: '0', price:'€', img: '.'});
+    {title: 'Corona', soft: '0', price_in_euro:'.', img: '.'});
 
   const drink8 = await Drink.create(
-    {title: 'Desperados', soft: '0', price:'€', img: '.'});
+    {title: 'Desperados', soft: '0', price_in_euro:'.', img: '.'});
 
   const drink9 = await Drink.create(
-    {title: 'Pinacolada', soft: '0', price:'€', img: '.'});
+    {title: 'Pinacolada', soft: '0', price_in_euro:'.', img: '.'});
 
 
   // Create Dessert
   const dessert1 = await Dessert.create(
-    {title: 'Tiramisu', price:'€', img: '.'});
+    {title: 'Tiramisu', price_in_euro:'.', img: '.'});
 
   const dessert2 = await Dessert.create(
-    {title: 'Fruit de saison', price:'€', img: '.'});
+    {title: 'Fruit de saison', price_in_euro:'.', img: '.'});
 
   const dessert3 = await Dessert.create(
-    {title: 'Cookie double chocolat', price:'€', img: '.'});
+    {title: 'Cookie double chocolat', price_in_euro:'.', img: '.'});
 
   const dessert4 = await Dessert.create(
-    {title: 'Compote de pomme', price:'€', img: '.'});
+    {title: 'Compote de pomme', price_in_euro:'.', img: '.'});
 
   const dessert5 = await Dessert.create(
-    {title: 'Compote de poire', price:'€', img: '.'});
+    {title: 'Compote de poire', price_in_euro:'.', img: '.'});
 
 
   // Create User
