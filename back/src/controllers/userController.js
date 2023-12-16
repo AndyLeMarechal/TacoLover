@@ -1,5 +1,7 @@
 import { User } from "../models/index.js";
 import Joi from 'joi';
+import { joiPasswordExtendCore } from 'joi-password';
+const joiPassword = Joi.extend(joiPasswordExtendCore);
 import bcrypt from "bcrypt";
 
 export async function getAllUsers(req, res) {
@@ -33,8 +35,23 @@ export async function createdUser(req, res) {
       .max(30)
       .required(),
 
-    password: Joi.string()
-      .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    password: joiPassword
+      .string()
+      .minOfSpecialCharacters(1)
+      .minOfLowercase(4)
+      .minOfUppercase(1)
+      .minOfNumeric(2)
+      .noWhiteSpaces()
+      .onlyLatinCharacters()
+      .messages({
+        'password.minOfUppercase': '{#label} should contain at least {#min} uppercase character',
+        'password.minOfSpecialCharacters':
+                  '{#label} should contain at least {#min} special character',
+        'password.minOfLowercase': '{#label} should contain at least {#min} lowercase character',
+        'password.minOfNumeric': '{#label} should contain at least {#min} numeric character',
+        'password.noWhiteSpaces': '{#label} should not contain white spaces',
+        'password.onlyLatinCharacters': '{#label} should contain only latin characters',
+      }),
 
     passwordConfirm: Joi.ref('password'),
 
@@ -106,8 +123,23 @@ export async function updatedUser(req, res) {
       .max(30)
       .required(),
 
-    password: Joi.string()
-      .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    password: joiPassword
+      .string()
+      .minOfSpecialCharacters(1)
+      .minOfLowercase(4)
+      .minOfUppercase(1)
+      .minOfNumeric(2)
+      .noWhiteSpaces()
+      .onlyLatinCharacters()
+      .messages({
+        'password.minOfUppercase': '{#label} should contain at least {#min} uppercase character',
+        'password.minOfSpecialCharacters':
+                  '{#label} should contain at least {#min} special character',
+        'password.minOfLowercase': '{#label} should contain at least {#min} lowercase character',
+        'password.minOfNumeric': '{#label} should contain at least {#min} numeric character',
+        'password.noWhiteSpaces': '{#label} should not contain white spaces',
+        'password.onlyLatinCharacters': '{#label} should contain only latin characters',
+      }),
 
     passwordConfirm: Joi.ref('password'),
 
