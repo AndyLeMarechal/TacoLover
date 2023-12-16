@@ -13,7 +13,7 @@ import { bodySanitizer } from "./middlewares/body-sanitizer.js";
 const app = express();
 
 // Allow some Cross origin requests
-app.use(cors({ origin: "*" })); // * = n'importe quel domaine ! Techniquement, il ne faudrait whitelister QUE notre front
+app.use(cors({ origin: "*", methods: "GET, POST, DELETE, PUT, PATCH, OPTIONS" })); // * = n'importe quel domaine ! Techniquement, il ne faudrait whitelister QUE notre front
 
 // Add body parser
 app.use(express.urlencoded({ extended: true })); // Ce body parser est capable de parser les body au format application/x-www-urlencoded (eg, les body envoyé par un <form> HTML)
