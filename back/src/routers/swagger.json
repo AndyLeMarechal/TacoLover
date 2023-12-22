@@ -213,6 +213,66 @@
               }
           }
         }}
+      },
+      "/menu": {
+        "get": {
+          "tags": ["Menu"],
+          "description": "Retourne l'ensemble des desserts existantes ordonné par leur id. \n \n ``` SELECT id, title, price_in_euro, img, created_at, updated_at FROM dessert AS Dessert ORDER BY Dessert.id```" ,
+          "operationId": "getAllDesserts",
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Les desserts on bien été trouver"
+            },
+            "404": {
+                "description": "Le nom de la route na pas été trouver",
+                "schema": {
+                  "properties": {
+                    "error": { "type": "string", "example": "/desserts not found" }
+                  }
+                }
+            }
+          }
+        }, 
+        "post": {
+          "tags": ["Menu"],
+          "description": "Créer un nouveau Dessert. \n \n ```INSERT INTO dessert (id,title,price_in_euro,img,created_at,updated_at) VALUES (DEFAULT,$1,$2,$3,$4,$5) RETURNING id,title,price_in_euro,img,created_at,updated_at;```",
+          "operationId": "createdDessert",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Exemple pour la creation d'un dessert",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string", "example": "Nom du dessert" },
+                  "price_in_euro": { "type": "number", "example": "1" }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Le Dessert a bien été créer"
+            },
+            "400": {
+              "description": "Le dessert na pas pu etre creér",
+              "schema": {
+                "properties": {
+                  "error": { "type": "string", "example": "Joi error message" }
+                }
+              }
+            }
+          }
+        }
       }
     },
   
