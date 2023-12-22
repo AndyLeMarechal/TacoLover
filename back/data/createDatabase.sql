@@ -8,7 +8,7 @@ CREATE TABLE "menu" (
   "description" TEXT NOT NULL,
   "price_in_euro" TEXT NOT NULL,
   "img" TEXT,
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
 
@@ -18,7 +18,7 @@ CREATE TABLE "plat" (
   "description" TEXT NOT NULL,
   "price_in_euro" TEXT NOT NULL,
   "img" TEXT,
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
 CREATE TABLE "drink" (
@@ -27,7 +27,7 @@ CREATE TABLE "drink" (
   "soft" BOOLEAN NOT NULL,
   "price_in_euro" TEXT NOT NULL,
   "img" TEXT,
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
 CREATE TABLE "dessert" (
@@ -35,7 +35,7 @@ CREATE TABLE "dessert" (
   "title" TEXT NOT NULL ,
   "price_in_euro" TEXT NOT NULL,
   "img" TEXT,
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
 CREATE TABLE "user" (
@@ -47,21 +47,21 @@ CREATE TABLE "user" (
   "lastname" TEXT NOT NULL,
   "address" TEXT NOT NULL,
   "role" TEXT NOT NULL,
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
 CREATE TABLE "restaurant" (
   "id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   "name" TEXT NOT NULL,
   "address" TEXT NOT NULL,
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
 CREATE TABLE "tag" (
   "id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   "name" TEXT NOT NULL UNIQUE,
   "color" VARCHAR(7),
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
 
@@ -73,7 +73,7 @@ CREATE TABLE "menu_has_plat" (
 
   UNIQUE ("menu_id", "plat_id"),
 
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
 
@@ -85,7 +85,7 @@ CREATE TABLE "menu_has_drink" (
 
   UNIQUE ("menu_id", "drink_id"),
 
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
 
@@ -97,7 +97,7 @@ CREATE TABLE "menu_has_dessert" (
 
   UNIQUE ("menu_id", "dessert_id"),
 
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
 
@@ -109,7 +109,7 @@ CREATE TABLE "plat_has_tag" (
 
   UNIQUE ("plat_id", "tag_id"),
 
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "created_at" timestamptz NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ
 );
 
