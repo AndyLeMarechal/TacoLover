@@ -2,112 +2,146 @@ import { Menu } from "../models/index.js";
 import Joi from 'joi';
 
 export async function getAllMenus(req, res) {
-  const menus = await Menu.findAll({
-    order: ["id"],
-    include: ['plats','drinks','desserts']
-  });
-  if(!menus){
-    return res.status(404).json({error: '/menus not found.'});
+  try{
+    const menus = await Menu.findAll({
+      order: ["id"],
+      include: ['plats','drinks','desserts']
+    });
+    if(!menus){
+      return res.status(404).json({error: '/menus not found.'});
+    }
+    res.status(200).json(menus);
   }
-  res.status(200).json(menus);
+  catch(error){
+    console.error(error);
+    res.status(500).json({error: '500 Internal Server Error'});
+  }
 }
+
 
 export async function getOneMenu(req, res) {
-  const menuId = Number.parseInt(req.params.id, 10);
-  if(isNaN(menuId)){
-    return res.status(400).json({error: 'Menu ID should be a valid integer'});
+  try{
+    const menuId = Number.parseInt(req.params.id, 10);
+    if(isNaN(menuId)){
+      return res.status(400).json({error: 'Menu ID should be a valid integer'});
+    }
+    const menu = await Menu.findByPk(menuId, {
+      order: ["id"],
+      include: ['plats','drinks','desserts']
+    });
+    if(!menu){
+      return res.status(404).json({error: 'Menu not found. Please verify the provided id.'});
+    }
+    res.status(200).json(menu);
   }
-  const menu = await Menu.findByPk(menuId, {
-    order: ["id"],
-    include: ['plats','drinks','desserts']
-  });
-  if(!menu){
-    return res.status(404).json({error: 'Menu not found. Please verify the provided id.'});
+  catch(error){
+    console.error(error);
+    res.status(500).json({error: '500 Internal Server Error'});
   }
-  res.status(200).json(menu);
 }
+
 
 export async function createdMenu(req, res) {
-  const createMenuSchema = Joi.object({
-    title: Joi.string()
-      .min(3)
-      .max(40)
-      .required(),
-
-    price_in_euro: Joi.number()
-      .min(1)
-      .max(4)
-      .required(),
-
-    description: Joi.string()
-      .min(3)
-      .max(200)
-      .required(),
-
-    img: Joi.string().empty('').dataUri()
-  });
-  const { error } = createMenuSchema.validate(req.body);
-  if (error) { return res.status(400).json({ error: error.message }); }
-
-  const menu = await Menu.create({
-    title: req.body.title,
-    description: req.body.description,
-    price_in_euro: req.body.price_in_euro || '0' , 
-    img: req.body.img || "."
-  });
-  res.status(201).json(menu);
+  try{
+    const createMenuSchema = Joi.object({
+      title: Joi.string()
+        .min(3)
+        .max(40)
+        .required(),
+  
+      price_in_euro: Joi.number()
+        .min(1)
+        .max(4)
+        .required(),
+  
+      description: Joi.string()
+        .min(3)
+        .max(200)
+        .required(),
+  
+      img: Joi.string().empty('').dataUri()
+    });
+    const { error } = createMenuSchema.validate(req.body);
+    if (error) { return res.status(400).json({ error: error.message }); }
+  
+    const menu = await Menu.create({
+      title: req.body.title,
+      description: req.body.description,
+      price_in_euro: req.body.price_in_euro || '0' , 
+      img: req.body.img || "."
+    });
+    res.status(201).json(menu);
+  }
+  catch(error){
+    console.error(error);
+    res.status(500).json({error: '500 Internal Server Error'});
+  }
 }
+
 
 export async function updatedMenu(req, res) {
-  const menuId = Number.parseInt(req.params.id, 10);
-  if(isNaN(menuId)){
-    return res.status(400).json({error: 'Menu ID should be a valid integer'});
+  try{
+    const menuId = Number.parseInt(req.params.id, 10);
+    if(isNaN(menuId)){
+      return res.status(400).json({error: 'Menu ID should be a valid integer'});
+    }
+    const menu = await Menu.findByPk(menuId);
+    if(!menu){
+      return res.status(404).json({error: 'Menu not found. Please verify the provided id.'});
+    }
+    const updateMenuSchema = Joi.object({
+      title: Joi.string()
+        .min(3)
+        .max(40)
+        .required(),
+  
+      price_in_euro: Joi.number()
+        .min(1)
+        .max(4)
+        .required(),
+  
+      description: Joi.string()
+        .min(3)
+        .max(200)
+        .required(),
+  
+      img: Joi.string().empty('').dataUri()
+    });
+    const { error } = updateMenuSchema.validate(req.body);
+    if (error) { return res.status(400).json({ error: error.message }); }
+  
+    const updatedMenu = await menu.update({
+      title: req.body.title,
+      description: req.body.description,
+      price_in_euro: req.body.price_in_euro ,
+      img: req.body.img
+    });
+  
+    res.status(200).json(updatedMenu);
   }
-  const menu = await Menu.findByPk(menuId);
-  if(!menu){
-    return res.status(404).json({error: 'Menu not found. Please verify the provided id.'});
+  catch(error){
+    console.error(error);
+    res.status(500).json({error: '500 Internal Server Error'});
   }
-  const updateMenuSchema = Joi.object({
-    title: Joi.string()
-      .min(3)
-      .max(40)
-      .required(),
-
-    price_in_euro: Joi.number()
-      .min(1)
-      .max(4)
-      .required(),
-
-    description: Joi.string()
-      .min(3)
-      .max(200)
-      .required(),
-
-    img: Joi.string().empty('').dataUri()
-  });
-  const { error } = updateMenuSchema.validate(req.body);
-  if (error) { return res.status(400).json({ error: error.message }); }
-
-  const updatedMenu = await menu.update({
-    title: req.body.title,
-    description: req.body.description,
-    price_in_euro: req.body.price_in_euro ,
-    img: req.body.img
-  });
-
-  res.status(200).json(updatedMenu);
 
 }
 
+
 export async function deletedMenu(req, res) {
-  const menuId = req.params.id;
-  if(isNaN(menuId)){
-    return res.status(400).json({error: 'Menu ID should be a valid integer'});
+  try{
+    const menuId = req.params.id;
+    if(isNaN(menuId)){
+      return res.status(400).json({error: 'Menu ID should be a valid integer'});
+    }
+    const menu = await Menu.findByPk(menuId);
+    if(!menu){
+      return res.status(404).json({error: 'Menu not found. Please verify the provided id.'});
+    }
+    await menu.destroy();
+    res.status(204).end();
   }
-  const menu = await Menu.findByPk(menuId);
-  if(!menu){
-    return res.status(404).json({error: 'Menu not found. Please verify the provided id.'});
+  catch(error){
+    console.error(error);
+    res.status(500).json({error: '500 Internal Server Error'});
   }
-  await menu.destroy();
-  res.status(204).end();
 }
