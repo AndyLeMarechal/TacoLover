@@ -14,12 +14,12 @@
     "consumes": ["application/json"],
     "produces": ["application/json"],
     "tags": [
-      {"name": "Menu", "description": "Menu de la franchise TacoLover"},
-      {"name": "Plat", "description": "Plat de la franchise TacoLover"},
-      {"name": "Drink", "description": "Boisson de la franchise TacoLover"},
-      {"name": "Dessert", "description": "Dessert de la franchise TacoLover"},
-      {"name": "Restaurant", "description": "Liste des restaurant du groupe TacoLover"},
-      {"name": "Tag", "description": "Tag"},
+      {"name": "Menu", "description": "Liste des menus de la franchise TacoLover"},
+      {"name": "Plat", "description": "Liste des plats de la franchise TacoLover"},
+      {"name": "Drink", "description": "Liste des boissons de la franchise TacoLover"},
+      {"name": "Dessert", "description": "Liste des desserts de la franchise TacoLover"},
+      {"name": "Restaurant", "description": "Liste des restaurant de la franchise TacoLover"},
+      {"name": "Tag", "description": "Liste des tags de la franchise TacoLover"},
       {"name": "User", "description": "Liste des utilisateur de la franchise TacoLover"}
     ],
     "paths": {
@@ -70,7 +70,7 @@
           ],
           "responses": {
             "201": {
-              "description": "Le Dessert a bien été créer"
+              "description": "Le dessert a bien été créer"
             },
             "400": {
               "description": "Le dessert na pas pu etre creér",
@@ -214,7 +214,7 @@
           }
         }}
       },
-      "/menu": {
+      "/menus": {
         "get": {
           "tags": ["Menu"],
           "description": "Retourne l'ensemble des desserts existantes ordonné par leur id. \n \n ``` SELECT id, title, price_in_euro, img, created_at, updated_at FROM dessert AS Dessert ORDER BY Dessert.id```" ,
