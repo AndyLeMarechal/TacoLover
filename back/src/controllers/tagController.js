@@ -1,5 +1,6 @@
 import { Tag } from "../models/index.js";
-import Joi from 'joi';
+import postTag from "../../middlewares/schemas/postTag.js";
+import patchTag from "../../middlewares/schemas/patchTag.js";
 
 export async function getAllTags(req, res) {
   try{
@@ -40,18 +41,14 @@ export async function getOneTag(req, res) {
 
 export async function createdTag(req, res) {
   try{
-    const createTagSchema = Joi.object({
-      name: Joi.string()
-        .alphanum()
-        .min(3)
-        .max(40)
-        .required(),
-  
-      color: Joi.string()
-        .hex()
-    });
+    const createTagSchema = postTag;
     const { error } = createTagSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
+
+    const existingTag = await Tag.findOne({ where: { name: req.body.name } });
+    if(existingTag){
+      return res.status(400).json({error: 'Name is already in use'});
+    }
   
     const createdTag = await Tag.create({
       name: req.body.name,
@@ -76,18 +73,15 @@ export async function updatedTag(req, res) {
     if(!tag){
       return res.status(404).json({error: 'Tag not found. Please verify the provided id.'});
     }
-    const updateTagSchema = Joi.object({
-      name: Joi.string()
-        .alphanum()
-        .min(3)
-        .max(40)
-        .required(),
-  
-      color: Joi.string()
-        .hex()
-    });
+    const updateTagSchema = patchTag;
     const { error } = updateTagSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
+
+    const existingTag = await Tag.findOne({ where: { name: req.body.name } });
+    if(existingTag){
+      return res.status(400).json({error: 'Name is already in use'});
+    }
+    
     const updatedTag = await tag.update({
       name: req.body.name,
       color: req.body.color
