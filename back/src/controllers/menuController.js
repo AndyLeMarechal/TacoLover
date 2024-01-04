@@ -1,5 +1,6 @@
 import { Menu } from "../models/index.js";
-import Joi from 'joi';
+import postMenu from "../../middlewares/schemas/postMenu.js";
+import patchMenu from "../../middlewares/schemas/patchMenu.js";
 
 export async function getAllMenus(req, res) {
   try{
@@ -43,34 +44,30 @@ export async function getOneMenu(req, res) {
 
 export async function createdMenu(req, res) {
   try{
-    const createMenuSchema = Joi.object({
-      title: Joi.string()
-        .min(3)
-        .max(40)
-        .required(),
-  
-      price_in_euro: Joi.number()
-        .min(1)
-        .max(4)
-        .required(),
-  
-      description: Joi.string()
-        .min(3)
-        .max(200)
-        .required(),
-  
-      img: Joi.string().empty('').dataUri()
-    });
+    const menuId = Number.parseInt(req.params.id, 10);
+    if(isNaN(menuId)){
+      return res.status(400).json({error: 'Menu ID should be a valid integer'});
+    }
+    const menu = await Menu.findByPk(menuId);
+    if(!menu){
+      return res.status(404).json({error: 'Menu not found. Please verify the provided id.'});
+    }
+    const createMenuSchema = postMenu;
     const { error } = createMenuSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
+
+    const existingMenu = await Menu.findOne({ where: { title: req.body.title } });
+    if(existingMenu){
+      return res.status(400).json({error: 'Title is already in use'});
+    }
   
-    const menu = await Menu.create({
+    const createdMenu = await Menu.create({
       title: req.body.title,
       description: req.body.description,
       price_in_euro: req.body.price_in_euro || '0' , 
       img: req.body.img || "."
     });
-    res.status(201).json(menu);
+    res.status(201).json(createdMenu);
   }
   catch(error){
     console.error(error);
@@ -89,26 +86,14 @@ export async function updatedMenu(req, res) {
     if(!menu){
       return res.status(404).json({error: 'Menu not found. Please verify the provided id.'});
     }
-    const updateMenuSchema = Joi.object({
-      title: Joi.string()
-        .min(3)
-        .max(40)
-        .required(),
-  
-      price_in_euro: Joi.number()
-        .min(1)
-        .max(4)
-        .required(),
-  
-      description: Joi.string()
-        .min(3)
-        .max(200)
-        .required(),
-  
-      img: Joi.string().empty('').dataUri()
-    });
+    const updateMenuSchema = patchMenu;
     const { error } = updateMenuSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
+
+    const existingMenu = await Menu.findOne({ where: { title: req.body.title } });
+    if(existingMenu){
+      return res.status(400).json({error: 'Title is already in use'});
+    }
   
     const updatedMenu = await menu.update({
       title: req.body.title,
