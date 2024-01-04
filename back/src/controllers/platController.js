@@ -1,5 +1,6 @@
 import { Plat } from "../models/index.js";
-import Joi from 'joi';
+import postPlat from "../../middlewares/schemas/postPlat.js";
+import patchPlat from "../../middlewares/schemas/patchPlat.js";
 
 export async function getAllPlats(req, res) {
   try{
@@ -41,24 +42,15 @@ export async function getOnePlat(req, res) {
 
 export async function createdPlat(req, res) {
   try{
-    const createPlatSchema = Joi.object({
-      description: Joi.string()
-        .min(3)
-        .max(200)
-        .required(),
-  
-      title: Joi.string()
-        .min(3)
-        .max(40)
-        .required(),
-  
-      price_in_euro: Joi.number()
-        .min(1)
-        .max(4)
-        .required(),
-  
-      img: Joi.string().empty('').dataUri()
-    });
+    const platId = Number.parseInt(req.params.id, 10);
+    if(isNaN(platId)){
+      return res.status(400).json({error: 'Plat ID should be a valid integer'});
+    }
+    const plat = await Plat.findByPk(platId);
+    if(!plat){
+      return res.status(404).json({error: 'Plat not found. Please verify the provided id.'});
+    }
+    const createPlatSchema = postPlat;
     const { error } = createPlatSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
   
@@ -88,24 +80,7 @@ export async function updatedPlat(req, res) {
       return res.status(404).json({error: 'Plat not found. Please verify the provided id.'});
     }
   
-    const updatePlatSchema = Joi.object({
-      description: Joi.string()
-        .min(3)
-        .max(200)
-        .required(),
-  
-      title: Joi.string()
-        .min(3)
-        .max(40)
-        .required(),
-  
-      price_in_euro: Joi.number()
-        .min(1)
-        .max(4)
-        .required(),
-  
-      img: Joi.string().empty('').dataUri()
-    });
+    const updatePlatSchema = patchPlat;
     const { error } = updatePlatSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
   
