@@ -50,6 +50,7 @@ export async function createdDessert(req, res) {
     if (existingDessert) {
       return res.status(400).json({error: 'Title is already in use'});
     }
+    
     const createdDessert = await Dessert.create({
       title: req.body.title,
       price_in_euro: req.body.price_in_euro || "0" ,

@@ -42,17 +42,14 @@ export async function getOnePlat(req, res) {
 
 export async function createdPlat(req, res) {
   try{
-    const platId = Number.parseInt(req.params.id, 10);
-    if(isNaN(platId)){
-      return res.status(400).json({error: 'Plat ID should be a valid integer'});
-    }
-    const plat = await Plat.findByPk(platId);
-    if(!plat){
-      return res.status(404).json({error: 'Plat not found. Please verify the provided id.'});
-    }
     const createPlatSchema = postPlat;
     const { error } = createPlatSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
+
+    const existingPlat = await Plat.findOne({ where: { title: req.body.title } });
+    if (existingPlat) {
+      return res.status(400).json({error: 'Title is already in use'});
+    }
   
     const createdPlat = await Plat.create({
       title: req.body.title,
@@ -83,6 +80,11 @@ export async function updatedPlat(req, res) {
     const updatePlatSchema = patchPlat;
     const { error } = updatePlatSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
+
+    const existingPlat = await Plat.findOne({ where: { title: req.body.title } });
+    if (existingPlat) {
+      return res.status(400).json({error: 'Title is already in use'});
+    }
   
     const updatedPlat = await plat.update({
       title: req.body.title,

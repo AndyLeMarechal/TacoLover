@@ -44,14 +44,6 @@ export async function getOneMenu(req, res) {
 
 export async function createdMenu(req, res) {
   try{
-    const menuId = Number.parseInt(req.params.id, 10);
-    if(isNaN(menuId)){
-      return res.status(400).json({error: 'Menu ID should be a valid integer'});
-    }
-    const menu = await Menu.findByPk(menuId);
-    if(!menu){
-      return res.status(404).json({error: 'Menu not found. Please verify the provided id.'});
-    }
     const createMenuSchema = postMenu;
     const { error } = createMenuSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
