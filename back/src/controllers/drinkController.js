@@ -1,5 +1,6 @@
 import { Drink } from "../models/index.js";
-import Joi from 'joi';
+import postDrink from "../../middlewares/schemas/postDrink.js";
+import patchDrink from "../../middlewares/schemas/patchDrink.js";
 
 export async function getAllDrinks(req, res) {
   try{
@@ -40,23 +41,14 @@ export async function getOneDrink(req, res) {
 
 export async function createdDrink(req, res) {
   try{
-    const createDrinkSchema = Joi.object({
-      soft: Joi.boolean(),
-      
-      
-      title: Joi.string()
-        .min(3)
-        .max(40)
-        .required(),
-      price_in_euro: Joi.number()
-        .min(1)
-        .max(4)
-        .required(),
-  
-      img: Joi.string().empty('').dataUri()
-    });
+    const createDrinkSchema = postDrink;
     const { error } = createDrinkSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
+    
+    const existingDrink = await Drink.findOne({ where: { title: req.body.title } });
+    if(existingDrink){
+      return res.status(400).json({error: 'Title is already in use'});
+    }
   
     const createdDrink = await Drink.create({
       title: req.body.title,
@@ -85,23 +77,14 @@ export async function updatedDrink(req, res) {
       return res.status(404).json({error: 'Drink not found. Please verify the provided id.'});
     }
   
-    const updateDrinkSchema = Joi.object({
-      soft: Joi.boolean(),
-  
-      title: Joi.string()
-        .min(3)
-        .max(40)
-        .required(),
-  
-      price_in_euro: Joi.number()
-        .min(1)
-        .max(4)
-        .required(),
-  
-      img: Joi.string().empty('').dataUri()
-    });
+    const updateDrinkSchema = patchDrink;
     const { error } = updateDrinkSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
+
+    const existingDrink = await Drink.findOne({ where: { title: req.body.title } });
+    if(existingDrink){
+      return res.status(400).json({error: 'Title is already in use'});
+    }
   
     const updatedDrink = await drink.update({
       title: req.body.title,
