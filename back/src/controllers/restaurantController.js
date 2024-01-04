@@ -1,5 +1,6 @@
 import { Restaurant } from "../models/index.js";
-import Joi from 'joi';
+import postRestaurant from "../../middlewares/schemas/postRestaurant.js";
+import patchRestaurant from "../../middlewares/schemas/patchRestaurant.js";
 
 export async function getAllRestaurants(req, res) {
   try{
@@ -39,20 +40,14 @@ export async function getOneRestaurant(req, res) {
 
 export async function createdRestaurant(req, res) {
   try{
-    const createRestaurantSchema = Joi.object({
-      name: Joi.string()
-        .alphanum()
-        .min(3)
-        .max(40)
-        .required(),
-  
-      address: Joi.string()
-        .min(3)
-        .max(200)
-        .required()
-    });
+    const createRestaurantSchema = postRestaurant;
     const { error } = createRestaurantSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
+
+    const existingRestaurant = await Restaurant.findOne({ where: { name: req.body.name } });
+    if(existingRestaurant){
+      return res.status(400).json({error: 'Name is already in use'});
+    }
   
     const createdRestaurant = await Restaurant.create({
       name: req.body.name,
@@ -78,20 +73,14 @@ export async function updatedRestaurant(req, res) {
       return res.status(404).json({error: 'Restaurant not found. Please verify the provided id.'});
     }
   
-    const updateRestaurantSchema = Joi.object({
-      name: Joi.string()
-        .alphanum()
-        .min(3)
-        .max(40)
-        .required(),
-  
-      address: Joi.string()
-        .min(3)
-        .max(200)
-        .required()
-    });
+    const updateRestaurantSchema = patchRestaurant;
     const { error } = updateRestaurantSchema.validate(req.body);
     if (error) { return res.status(400).json({ error: error.message }); }
+
+    const existingRestaurant = await Restaurant.findOne({ where: { name: req.body.name } });
+    if(existingRestaurant){
+      return res.status(400).json({error: 'Name is already in use'});
+    }
   
     const updatedRestaurant = await restaurant.update({
       name: req.body.name,
